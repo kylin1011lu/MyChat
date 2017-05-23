@@ -28,7 +28,9 @@ struct sq_handler_user : public sq_handler
 	void do_user_login(const MY_MSG_HEAD* msg);
 	void do_chat_request(const MY_MSG_HEAD* msg);
 private:
-
+	sq_record* m_record;
+	sq_record_entry* m_entry_acct;
+	sq_record_entry* m_entry_order;
 };
 
 struct sq_user_task : public sq_task

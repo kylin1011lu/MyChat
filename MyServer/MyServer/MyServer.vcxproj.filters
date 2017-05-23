@@ -96,6 +96,12 @@
     <ClInclude Include="src\game_struct.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="src\sq_record.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\sq_mysql.h">
+      <Filter>framework</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\server.cpp">
@@ -160,6 +166,12 @@
     </ClCompile>
     <ClCompile Include="src\sq_msg.cpp">
       <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sq_record.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\sq_mysql.cpp">
+      <Filter>framework</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

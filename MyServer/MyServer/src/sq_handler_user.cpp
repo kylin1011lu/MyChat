@@ -19,6 +19,11 @@ game_user_table::~game_user_table()
 //--------------------------------------------------------------------
 sq_handler_user::sq_handler_user()
 {
+	m_record = sq_record_init();
+	m_entry_acct = sq_record_data_init(m_record, "acct");
+	m_entry_order = sq_record_data_init(m_record, "order");
+
+
 	REGISTER_MSG_HANDLER(sq_handler_user, do_user_login, message::UserLoginRequest::ID);
 	REGISTER_MSG_HANDLER(sq_handler_user, do_chat_request, message::ChatRequest::ID);
 

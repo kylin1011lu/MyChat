@@ -60,7 +60,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>Ws2_32.lib;dep\win32\libraries\pthreadVCE2.lib;protobuf-lite.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Ws2_32.lib;dep\win32\libraries\pthreadVCE2.lib;dep\win32\mysql\lib\prebuilt\libmysql.lib;protobuf-lite.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>LIBCMT.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <AdditionalLibraryDirectories>$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
@@ -99,6 +99,7 @@ copy mydep\pthreadVCE2.dll bin\pthreadVCE2.dll</Command>
     <ClInclude Include="framework\sq_logger.h" />
     <ClInclude Include="framework\sq_misc.h" />
     <ClInclude Include="framework\sq_msg_queue.h" />
+    <ClInclude Include="framework\sq_mysql.h" />
     <ClInclude Include="framework\sq_network.h" />
     <ClInclude Include="framework\sq_network_object.h" />
     <ClInclude Include="framework\sq_object_pool.h" />
@@ -115,6 +116,7 @@ copy mydep\pthreadVCE2.dll bin\pthreadVCE2.dll</Command>
     <ClInclude Include="src\sq_handler.h" />
     <ClInclude Include="src\sq_handler_user.h" />
     <ClInclude Include="src\sq_msg.h" />
+    <ClInclude Include="src\sq_record.h" />
     <ClInclude Include="src\sq_user_client.h" />
   </ItemGroup>
   <ItemGroup>
@@ -126,6 +128,7 @@ copy mydep\pthreadVCE2.dll bin\pthreadVCE2.dll</Command>
     <ClCompile Include="framework\sq_logger.cpp" />
     <ClCompile Include="framework\sq_misc.cpp" />
     <ClCompile Include="framework\sq_msg_queue.cpp" />
+    <ClCompile Include="framework\sq_mysql.cpp" />
     <ClCompile Include="framework\sq_network.cpp" />
     <ClCompile Include="framework\sq_registry.cpp" />
     <ClCompile Include="framework\sq_socket.cpp" />
@@ -138,6 +141,7 @@ copy mydep\pthreadVCE2.dll bin\pthreadVCE2.dll</Command>
     <ClCompile Include="src\sq_handler.cpp" />
     <ClCompile Include="src\sq_handler_user.cpp" />
     <ClCompile Include="src\sq_msg.cpp" />
+    <ClCompile Include="src\sq_record.cpp" />
     <ClCompile Include="src\sq_user_client.cpp" />
   </ItemGroup>
   <ItemGroup>

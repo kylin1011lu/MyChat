@@ -7,7 +7,7 @@
 #define __SQ_HANDLER_H__
 
 #include "sq_user_client.h"
-
+#include "sq_record.h"
 
 
 #define VILLAGE_FIELDS_SIZE 36

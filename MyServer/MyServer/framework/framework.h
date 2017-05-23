@@ -33,7 +33,7 @@
 
 typedef int ssize_t;
 #define strcasecmp stricmp
-
+#define __gnu_cxx std
 #else
 #define closesocket				close
 typedef int						SOCKET;
@@ -59,6 +59,9 @@ typedef int						SOCKET;
 
 //dep include
 #include "pthread.h"
+
+#include "mysql/mysql.h"
+#include "mysql/errmsg.h"
 
 #define USE_RAPIDXML	1
 
@@ -95,6 +98,8 @@ typedef int						SOCKET;
 #include "sq_xml_parser.h"
 #include "sq_msg_queue.h"
 #include "sq_client.h"
+#include "sq_mysql.h"
+
 
 //src include
 #include "common.pb.h"

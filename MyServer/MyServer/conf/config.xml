@@ -1,6 +1,19 @@
 <?xml version="1.0"?>
 <root>
 	<server version="0.0.1" APPID="2" APPNAME="MyChat"/>
+	
+	<db num="8">
+		<db0 host="59.110.213.172" user="root" passwd="LUQILIN1011lu;" db="zebra0_n" port="3306"/>
+		<db1 host="59.110.213.172" user="root" passwd="LUQILIN1011lu;" db="zebra1_n" port="3306"/>
+		<db2 host="59.110.213.172" user="root" passwd="LUQILIN1011lu;" db="zebra2_n" port="3306"/>
+		<db3 host="59.110.213.172" user="root" passwd="LUQILIN1011lu;" db="zebra3_n" port="3306"/>
+		<db4 host="59.110.213.172" user="root" passwd="LUQILIN1011lu;" db="zebra4_n" port="3306"/>
+		<db5 host="59.110.213.172" user="root" passwd="LUQILIN1011lu;" db="zebra5_n" port="3306"/>
+		<db6 host="59.110.213.172" user="root" passwd="LUQILIN1011lu;" db="zebra6_n" port="3306"/>
+		<db7 host="59.110.213.172" user="root" passwd="LUQILIN1011lu;" db="zebra7_n" port="3306"/>
+	</db>
+	
+	
 	<user>
 		<bind ip="0.0.0.0" port="12012"/>
 	</user>
