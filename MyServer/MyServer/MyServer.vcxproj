@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{C3E359C7-E4E3-4B24-A13F-F25B8A0B4115}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>MyServer</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>src;framework;dep\win32;dep\win32\pthread;protobuf;external\protobuf-lite;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>
+      </ForcedIncludeFiles>
+      <CompileAs>Default</CompileAs>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>Ws2_32.lib;dep\win32\libraries\pthreadVCE2.lib;protobuf-lite.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <IgnoreSpecificDefaultLibraries>LIBCMT.lib;%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <AdditionalLibraryDirectories>$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <PostBuildEvent>
+      <Command>copy $(OutDir)$(TargetName)$(TargetExt) bin\$(TargetName)$(TargetExt)
+copy $(OutDir)MyServer.pdb bin\MyServer.pdb
+copy mydep\pthreadVCE2.dll bin\pthreadVCE2.dll</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="framework\constructor.h" />
+    <ClInclude Include="framework\define.h" />
+    <ClInclude Include="framework\framework.h" />
+    <ClInclude Include="framework\getopt.h" />
+    <ClInclude Include="framework\protocol.h" />
+    <ClInclude Include="framework\sq_client.h" />
+    <ClInclude Include="framework\sq_epoll.h" />
+    <ClInclude Include="framework\sq_listening.h" />
+    <ClInclude Include="framework\sq_logger.h" />
+    <ClInclude Include="framework\sq_misc.h" />
+    <ClInclude Include="framework\sq_msg_queue.h" />
+    <ClInclude Include="framework\sq_network.h" />
+    <ClInclude Include="framework\sq_network_object.h" />
+    <ClInclude Include="framework\sq_object_pool.h" />
+    <ClInclude Include="framework\sq_registry.h" />
+    <ClInclude Include="framework\sq_socket.h" />
+    <ClInclude Include="framework\sq_thread.h" />
+    <ClInclude Include="framework\sq_time.h" />
+    <ClInclude Include="framework\sq_timer.h" />
+    <ClInclude Include="framework\sq_xml_parser.h" />
+    <ClInclude Include="framework\tailor.h" />
+    <ClInclude Include="protobuf\common.pb.h" />
+    <ClInclude Include="src\game_struct.h" />
+    <ClInclude Include="src\server.h" />
+    <ClInclude Include="src\sq_handler.h" />
+    <ClInclude Include="src\sq_handler_user.h" />
+    <ClInclude Include="src\sq_msg.h" />
+    <ClInclude Include="src\sq_user_client.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="framework\getopt.c" />
+    <ClCompile Include="framework\protocol.cpp" />
+    <ClCompile Include="framework\sq_client.cpp" />
+    <ClCompile Include="framework\sq_epoll.cpp" />
+    <ClCompile Include="framework\sq_listening.cpp" />
+    <ClCompile Include="framework\sq_logger.cpp" />
+    <ClCompile Include="framework\sq_misc.cpp" />
+    <ClCompile Include="framework\sq_msg_queue.cpp" />
+    <ClCompile Include="framework\sq_network.cpp" />
+    <ClCompile Include="framework\sq_registry.cpp" />
+    <ClCompile Include="framework\sq_socket.cpp" />
+    <ClCompile Include="framework\sq_thread.cpp" />
+    <ClCompile Include="framework\sq_time.cpp" />
+    <ClCompile Include="framework\sq_timer.cpp" />
+    <ClCompile Include="framework\sq_xml_parser.cpp" />
+    <ClCompile Include="protobuf\common.pb.cc" />
+    <ClCompile Include="src\server.cpp" />
+    <ClCompile Include="src\sq_handler.cpp" />
+    <ClCompile Include="src\sq_handler_user.cpp" />
+    <ClCompile Include="src\sq_msg.cpp" />
+    <ClCompile Include="src\sq_user_client.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="external\protobuf-lite\protobuf-lite.vcxproj">
+      <Project>{b2e376c7-2849-4406-abf5-4728c3ce76b5}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

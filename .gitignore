@@ -1,0 +1,9 @@
+#Myconfigurations
+*.opensdf
+bin
+Debug
+*.psess
+*.vsp
+*.d
+*.o
+

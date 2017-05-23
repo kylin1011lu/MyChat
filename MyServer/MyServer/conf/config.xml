@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<root>
+	<server version="0.0.1" APPID="2" APPNAME="MyChat"/>
+	<user>
+		<bind ip="0.0.0.0" port="12012"/>
+	</user>
+
+</root>

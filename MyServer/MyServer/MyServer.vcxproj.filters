@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{9d7c882c-37f7-45f8-afe8-2a5dd6f080d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="framework">
+      <UniqueIdentifier>{7b6fcf79-d4bf-4f7e-b18f-1f92d49b8aea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="protobuf">
+      <UniqueIdentifier>{a4560ca4-187b-4ca5-9df9-8a74367a8de6}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\server.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\framework.h">
+      <Filter>framework</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\sq_listening.h">
+      <Filter>framework</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\sq_network.h">
+      <Filter>framework</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\sq_network_object.h">
+      <Filter>framework</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\sq_logger.h">
+      <Filter>framework</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\define.h">
+      <Filter>framework</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\sq_time.h">
+      <Filter>framework</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\sq_timer.h">
+      <Filter>framework</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\sq_misc.h">
+      <Filter>framework</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\getopt.h">
+      <Filter>framework</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\tailor.h">
+      <Filter>framework</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\protocol.h">
+      <Filter>framework</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\sq_epoll.h">
+      <Filter>framework</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\sq_xml_parser.h">
+      <Filter>framework</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\sq_registry.h">
+      <Filter>framework</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\sq_object_pool.h">
+      <Filter>framework</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\sq_socket.h">
+      <Filter>framework</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\sq_thread.h">
+      <Filter>framework</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\constructor.h">
+      <Filter>framework</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sq_handler.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\sq_msg_queue.h">
+      <Filter>framework</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sq_user_client.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="framework\sq_client.h">
+      <Filter>framework</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sq_handler_user.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="protobuf\common.pb.h">
+      <Filter>protobuf</Filter>
+    </ClInclude>
+    <ClInclude Include="src\sq_msg.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game_struct.h">
+      <Filter>src</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\server.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\sq_listening.cpp">
+      <Filter>framework</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\sq_network.cpp">
+      <Filter>framework</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\sq_logger.cpp">
+      <Filter>framework</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\sq_time.cpp">
+      <Filter>framework</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\sq_timer.cpp">
+      <Filter>framework</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\sq_misc.cpp">
+      <Filter>framework</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\getopt.c">
+      <Filter>framework</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\protocol.cpp">
+      <Filter>framework</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\sq_epoll.cpp">
+      <Filter>framework</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\sq_xml_parser.cpp">
+      <Filter>framework</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\sq_registry.cpp">
+      <Filter>framework</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\sq_socket.cpp">
+      <Filter>framework</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\sq_thread.cpp">
+      <Filter>framework</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sq_handler.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\sq_msg_queue.cpp">
+      <Filter>framework</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sq_user_client.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="framework\sq_client.cpp">
+      <Filter>framework</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sq_handler_user.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="protobuf\common.pb.cc">
+      <Filter>protobuf</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sq_msg.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

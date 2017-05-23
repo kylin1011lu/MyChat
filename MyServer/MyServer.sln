@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MyServer", "MyServer\MyServer.vcxproj", "{C3E359C7-E4E3-4B24-A13F-F25B8A0B4115}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B2E376C7-2849-4406-ABF5-4728C3CE76B5} = {B2E376C7-2849-4406-ABF5-4728C3CE76B5}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "protobuf-lite", "MyServer\external\protobuf-lite\protobuf-lite.vcxproj", "{B2E376C7-2849-4406-ABF5-4728C3CE76B5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C3E359C7-E4E3-4B24-A13F-F25B8A0B4115}.Debug|Win32.ActiveCfg = Debug|Win32
+		{C3E359C7-E4E3-4B24-A13F-F25B8A0B4115}.Debug|Win32.Build.0 = Debug|Win32
+		{C3E359C7-E4E3-4B24-A13F-F25B8A0B4115}.Release|Win32.ActiveCfg = Release|Win32
+		{C3E359C7-E4E3-4B24-A13F-F25B8A0B4115}.Release|Win32.Build.0 = Release|Win32
+		{B2E376C7-2849-4406-ABF5-4728C3CE76B5}.Debug|Win32.ActiveCfg = Debug|Win32
+		{B2E376C7-2849-4406-ABF5-4728C3CE76B5}.Debug|Win32.Build.0 = Debug|Win32
+		{B2E376C7-2849-4406-ABF5-4728C3CE76B5}.Release|Win32.ActiveCfg = Release|Win32
+		{B2E376C7-2849-4406-ABF5-4728C3CE76B5}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(Performance) = preSolution
+		HasPerformanceSessions = true
+	EndGlobalSection
+EndGlobal
