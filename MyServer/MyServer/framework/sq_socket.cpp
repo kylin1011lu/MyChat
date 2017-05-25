@@ -101,6 +101,10 @@ bool handle_buffer(sq_socket* c)
 	mymsg* msg = NULL;
 	switch (msghead->msgid)
 	{
+	case message::AccountRegisterRequest::ID:
+		msg = new message::AccountRegisterRequest();
+		msg->ParseFromArray(&pkBuf[MY_MSG_HEAD_SIZE], msg_size - MY_MSG_HEAD_SIZE);
+		break;
 	case message::UserLoginRequest::ID:
 		msg = new message::UserLoginRequest();
 		msg->ParseFromArray(&pkBuf[MY_MSG_HEAD_SIZE], msg_size - MY_MSG_HEAD_SIZE);
@@ -126,7 +130,6 @@ bool handle_buffer(sq_socket* c)
 
 	if (c->recv_buffer.current > msg_size)
 	{
-		//碎包
 		memmove(&c->recv_buffer.data[0], &c->recv_buffer.data[msg_size], c->recv_buffer.current - msg_size);
 	}
 	c->recv_buffer.current -= msg_size;
@@ -159,7 +162,8 @@ void sq_socket::receive()
 				/* on ET mode, MUST recv EAGAIN return */
 				return;
 			}
-			this->lost_connection(); break;
+			this->lost_connection(); 
+			break;
 		}
 		this->recv_buffer.current += n;
 		this->last_recv_time = time(0);

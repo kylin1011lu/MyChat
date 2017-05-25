@@ -102,6 +102,9 @@
     <ClInclude Include="framework\sq_mysql.h">
       <Filter>framework</Filter>
     </ClInclude>
+    <ClInclude Include="src\utility.h">
+      <Filter>src</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\server.cpp">
@@ -172,6 +175,9 @@
     </ClCompile>
     <ClCompile Include="framework\sq_mysql.cpp">
       <Filter>framework</Filter>
+    </ClCompile>
+    <ClCompile Include="src\utility.cpp">
+      <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

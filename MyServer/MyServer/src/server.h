@@ -29,11 +29,11 @@ struct server_struct
 	sq_object_pool<sq_socket>*					socket_pool;
 	sq_socket**									conntable;
 	sq_socket::socket_dispatch					socket_callback;
-	void(*sendmsg)(SOCKET, MY_MSG_HEAD*);
-	void(*close)(SOCKET);
-	bool(*handler_init)();
-	void(*handler_dispatch)(SOCKET, MY_MSG_HEAD*);
-	void(*handler_update)();
+	void										(*sendmsg)(SOCKET, MY_MSG_HEAD*);
+	void										(*close)(SOCKET);
+	bool										(*handler_init)();
+	void										(*handler_dispatch)(SOCKET, MY_MSG_HEAD*);
+	void										(*handler_update)();
 };
 
 extern server_struct* server;

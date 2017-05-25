@@ -118,6 +118,7 @@ copy mydep\pthreadVCE2.dll bin\pthreadVCE2.dll</Command>
     <ClInclude Include="src\sq_msg.h" />
     <ClInclude Include="src\sq_record.h" />
     <ClInclude Include="src\sq_user_client.h" />
+    <ClInclude Include="src\utility.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="framework\getopt.c" />
@@ -143,6 +144,7 @@ copy mydep\pthreadVCE2.dll bin\pthreadVCE2.dll</Command>
     <ClCompile Include="src\sq_msg.cpp" />
     <ClCompile Include="src\sq_record.cpp" />
     <ClCompile Include="src\sq_user_client.cpp" />
+    <ClCompile Include="src\utility.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="external\protobuf-lite\protobuf-lite.vcxproj">

@@ -113,7 +113,7 @@ public:
 	//bool										init_session_client(const char* conf_ip, const char* conf_domain, const char* conf_port);
 	bool										init_user_client(const char* conf_ip, const char* conf_domain, const char* conf_port);
 	//void										sendmsg(SOCKET connfd, nullmsg* msg);
-	void										poll();
+	virtual void								poll();
 	virtual void								onHourChanged(int hour);
 	virtual void								connection_close(SOCKET s);
 	//sq_web_service*								get_web_service(uint32_t reqid);

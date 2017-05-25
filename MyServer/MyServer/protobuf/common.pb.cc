@@ -16,6 +16,8 @@ namespace message {
 
 void protobuf_ShutdownFile_common_2eproto() {
   delete User::default_instance_;
+  delete AccountRegisterRequest::default_instance_;
+  delete AccountRegisterResponse::default_instance_;
   delete UserLoginRequest::default_instance_;
   delete UserLoginResponse::default_instance_;
   delete ChatRequest::default_instance_;
@@ -35,11 +37,15 @@ void protobuf_AddDesc_common_2eproto() {
 
 #endif
   User::default_instance_ = new User();
+  AccountRegisterRequest::default_instance_ = new AccountRegisterRequest();
+  AccountRegisterResponse::default_instance_ = new AccountRegisterResponse();
   UserLoginRequest::default_instance_ = new UserLoginRequest();
   UserLoginResponse::default_instance_ = new UserLoginResponse();
   ChatRequest::default_instance_ = new ChatRequest();
   ChatResponse::default_instance_ = new ChatResponse();
   User::default_instance_->InitAsDefaultInstance();
+  AccountRegisterRequest::default_instance_->InitAsDefaultInstance();
+  AccountRegisterResponse::default_instance_->InitAsDefaultInstance();
   UserLoginRequest::default_instance_->InitAsDefaultInstance();
   UserLoginResponse::default_instance_->InitAsDefaultInstance();
   ChatRequest::default_instance_->InitAsDefaultInstance();
@@ -268,6 +274,474 @@ void User::Swap(User* other) {
 
 ::std::string User::GetTypeName() const {
   return "message.User";
+}
+
+
+// ===================================================================
+
+bool AccountRegisterRequest_MSGID_IsValid(int value) {
+  switch(value) {
+    case 100:
+      return true;
+    default:
+      return false;
+  }
+}
+
+#ifndef _MSC_VER
+const AccountRegisterRequest_MSGID AccountRegisterRequest::ID;
+const AccountRegisterRequest_MSGID AccountRegisterRequest::MSGID_MIN;
+const AccountRegisterRequest_MSGID AccountRegisterRequest::MSGID_MAX;
+const int AccountRegisterRequest::MSGID_ARRAYSIZE;
+#endif  // _MSC_VER
+#ifndef _MSC_VER
+const int AccountRegisterRequest::kRegisterNameFieldNumber;
+const int AccountRegisterRequest::kRegisterPasswordFieldNumber;
+#endif  // !_MSC_VER
+
+AccountRegisterRequest::AccountRegisterRequest()
+  : ::google::protobuf::MessageLite() {
+  SharedCtor();
+}
+
+void AccountRegisterRequest::InitAsDefaultInstance() {
+}
+
+AccountRegisterRequest::AccountRegisterRequest(const AccountRegisterRequest& from)
+  : ::google::protobuf::MessageLite() {
+  SharedCtor();
+  MergeFrom(from);
+}
+
+void AccountRegisterRequest::SharedCtor() {
+  _cached_size_ = 0;
+  register_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  register_password_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+AccountRegisterRequest::~AccountRegisterRequest() {
+  SharedDtor();
+}
+
+void AccountRegisterRequest::SharedDtor() {
+  if (register_name_ != &::google::protobuf::internal::kEmptyString) {
+    delete register_name_;
+  }
+  if (register_password_ != &::google::protobuf::internal::kEmptyString) {
+    delete register_password_;
+  }
+  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  if (this != &default_instance()) {
+  #else
+  if (this != default_instance_) {
+  #endif
+  }
+}
+
+void AccountRegisterRequest::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const AccountRegisterRequest& AccountRegisterRequest::default_instance() {
+#ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  protobuf_AddDesc_common_2eproto();
+#else
+  if (default_instance_ == NULL) protobuf_AddDesc_common_2eproto();
+#endif
+  return *default_instance_;
+}
+
+AccountRegisterRequest* AccountRegisterRequest::default_instance_ = NULL;
+
+AccountRegisterRequest* AccountRegisterRequest::New() const {
+  return new AccountRegisterRequest;
+}
+
+void AccountRegisterRequest::Clear() {
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (has_register_name()) {
+      if (register_name_ != &::google::protobuf::internal::kEmptyString) {
+        register_name_->clear();
+      }
+    }
+    if (has_register_password()) {
+      if (register_password_ != &::google::protobuf::internal::kEmptyString) {
+        register_password_->clear();
+      }
+    }
+  }
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+bool AccountRegisterRequest::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+  ::google::protobuf::uint32 tag;
+  while ((tag = input->ReadTag()) != 0) {
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required bytes register_name = 2;
+      case 2: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
+                input, this->mutable_register_name()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(26)) goto parse_register_password;
+        break;
+      }
+
+      // required bytes register_password = 3;
+      case 3: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_register_password:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
+                input, this->mutable_register_password()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectAtEnd()) return true;
+        break;
+      }
+
+      default: {
+      handle_uninterpreted:
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          return true;
+        }
+        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
+        break;
+      }
+    }
+  }
+  return true;
+#undef DO_
+}
+
+void AccountRegisterRequest::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // required bytes register_name = 2;
+  if (has_register_name()) {
+    ::google::protobuf::internal::WireFormatLite::WriteBytes(
+      2, this->register_name(), output);
+  }
+
+  // required bytes register_password = 3;
+  if (has_register_password()) {
+    ::google::protobuf::internal::WireFormatLite::WriteBytes(
+      3, this->register_password(), output);
+  }
+
+}
+
+int AccountRegisterRequest::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required bytes register_name = 2;
+    if (has_register_name()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::BytesSize(
+          this->register_name());
+    }
+
+    // required bytes register_password = 3;
+    if (has_register_password()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::BytesSize(
+          this->register_password());
+    }
+
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void AccountRegisterRequest::CheckTypeAndMergeFrom(
+    const ::google::protobuf::MessageLite& from) {
+  MergeFrom(*::google::protobuf::down_cast<const AccountRegisterRequest*>(&from));
+}
+
+void AccountRegisterRequest::MergeFrom(const AccountRegisterRequest& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_register_name()) {
+      set_register_name(from.register_name());
+    }
+    if (from.has_register_password()) {
+      set_register_password(from.register_password());
+    }
+  }
+}
+
+void AccountRegisterRequest::CopyFrom(const AccountRegisterRequest& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool AccountRegisterRequest::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
+
+  return true;
+}
+
+void AccountRegisterRequest::Swap(AccountRegisterRequest* other) {
+  if (other != this) {
+    std::swap(register_name_, other->register_name_);
+    std::swap(register_password_, other->register_password_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::std::string AccountRegisterRequest::GetTypeName() const {
+  return "message.AccountRegisterRequest";
+}
+
+
+// ===================================================================
+
+bool AccountRegisterResponse_MSGID_IsValid(int value) {
+  switch(value) {
+    case 101:
+      return true;
+    default:
+      return false;
+  }
+}
+
+#ifndef _MSC_VER
+const AccountRegisterResponse_MSGID AccountRegisterResponse::ID;
+const AccountRegisterResponse_MSGID AccountRegisterResponse::MSGID_MIN;
+const AccountRegisterResponse_MSGID AccountRegisterResponse::MSGID_MAX;
+const int AccountRegisterResponse::MSGID_ARRAYSIZE;
+#endif  // _MSC_VER
+bool AccountRegisterResponse_RegRetCode_IsValid(int value) {
+  switch(value) {
+    case 0:
+    case 1:
+      return true;
+    default:
+      return false;
+  }
+}
+
+#ifndef _MSC_VER
+const AccountRegisterResponse_RegRetCode AccountRegisterResponse::CODE_SUCCESS;
+const AccountRegisterResponse_RegRetCode AccountRegisterResponse::CODE_SAME_NAME;
+const AccountRegisterResponse_RegRetCode AccountRegisterResponse::RegRetCode_MIN;
+const AccountRegisterResponse_RegRetCode AccountRegisterResponse::RegRetCode_MAX;
+const int AccountRegisterResponse::RegRetCode_ARRAYSIZE;
+#endif  // _MSC_VER
+#ifndef _MSC_VER
+const int AccountRegisterResponse::kRetCodeFieldNumber;
+const int AccountRegisterResponse::kUseridFieldNumber;
+#endif  // !_MSC_VER
+
+AccountRegisterResponse::AccountRegisterResponse()
+  : ::google::protobuf::MessageLite() {
+  SharedCtor();
+}
+
+void AccountRegisterResponse::InitAsDefaultInstance() {
+}
+
+AccountRegisterResponse::AccountRegisterResponse(const AccountRegisterResponse& from)
+  : ::google::protobuf::MessageLite() {
+  SharedCtor();
+  MergeFrom(from);
+}
+
+void AccountRegisterResponse::SharedCtor() {
+  _cached_size_ = 0;
+  ret_code_ = 0;
+  userid_ = 0u;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+AccountRegisterResponse::~AccountRegisterResponse() {
+  SharedDtor();
+}
+
+void AccountRegisterResponse::SharedDtor() {
+  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  if (this != &default_instance()) {
+  #else
+  if (this != default_instance_) {
+  #endif
+  }
+}
+
+void AccountRegisterResponse::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const AccountRegisterResponse& AccountRegisterResponse::default_instance() {
+#ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  protobuf_AddDesc_common_2eproto();
+#else
+  if (default_instance_ == NULL) protobuf_AddDesc_common_2eproto();
+#endif
+  return *default_instance_;
+}
+
+AccountRegisterResponse* AccountRegisterResponse::default_instance_ = NULL;
+
+AccountRegisterResponse* AccountRegisterResponse::New() const {
+  return new AccountRegisterResponse;
+}
+
+void AccountRegisterResponse::Clear() {
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    ret_code_ = 0;
+    userid_ = 0u;
+  }
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+bool AccountRegisterResponse::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+  ::google::protobuf::uint32 tag;
+  while ((tag = input->ReadTag()) != 0) {
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required .message.AccountRegisterResponse.RegRetCode ret_code = 3;
+      case 3: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+          int value;
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
+                 input, &value)));
+          if (::message::AccountRegisterResponse_RegRetCode_IsValid(value)) {
+            set_ret_code(static_cast< ::message::AccountRegisterResponse_RegRetCode >(value));
+          }
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(32)) goto parse_userid;
+        break;
+      }
+
+      // required uint32 userid = 4;
+      case 4: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+         parse_userid:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, &userid_)));
+          set_has_userid();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectAtEnd()) return true;
+        break;
+      }
+
+      default: {
+      handle_uninterpreted:
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          return true;
+        }
+        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
+        break;
+      }
+    }
+  }
+  return true;
+#undef DO_
+}
+
+void AccountRegisterResponse::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // required .message.AccountRegisterResponse.RegRetCode ret_code = 3;
+  if (has_ret_code()) {
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      3, this->ret_code(), output);
+  }
+
+  // required uint32 userid = 4;
+  if (has_userid()) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt32(4, this->userid(), output);
+  }
+
+}
+
+int AccountRegisterResponse::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required .message.AccountRegisterResponse.RegRetCode ret_code = 3;
+    if (has_ret_code()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::EnumSize(this->ret_code());
+    }
+
+    // required uint32 userid = 4;
+    if (has_userid()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::UInt32Size(
+          this->userid());
+    }
+
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void AccountRegisterResponse::CheckTypeAndMergeFrom(
+    const ::google::protobuf::MessageLite& from) {
+  MergeFrom(*::google::protobuf::down_cast<const AccountRegisterResponse*>(&from));
+}
+
+void AccountRegisterResponse::MergeFrom(const AccountRegisterResponse& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_ret_code()) {
+      set_ret_code(from.ret_code());
+    }
+    if (from.has_userid()) {
+      set_userid(from.userid());
+    }
+  }
+}
+
+void AccountRegisterResponse::CopyFrom(const AccountRegisterResponse& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool AccountRegisterResponse::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
+
+  return true;
+}
+
+void AccountRegisterResponse::Swap(AccountRegisterResponse* other) {
+  if (other != this) {
+    std::swap(ret_code_, other->ret_code_);
+    std::swap(userid_, other->userid_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::std::string AccountRegisterResponse::GetTypeName() const {
+  return "message.AccountRegisterResponse";
 }
 
 
@@ -968,6 +1442,7 @@ const int ChatResponse::MSGID_ARRAYSIZE;
 #endif  // _MSC_VER
 #ifndef _MSC_VER
 const int ChatResponse::kChatContentFieldNumber;
+const int ChatResponse::kSendUseridFieldNumber;
 #endif  // !_MSC_VER
 
 ChatResponse::ChatResponse()
@@ -987,6 +1462,7 @@ ChatResponse::ChatResponse(const ChatResponse& from)
 void ChatResponse::SharedCtor() {
   _cached_size_ = 0;
   chat_content_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  send_userid_ = 0u;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -1033,6 +1509,7 @@ void ChatResponse::Clear() {
         chat_content_->clear();
       }
     }
+    send_userid_ = 0u;
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
@@ -1049,6 +1526,22 @@ bool ChatResponse::MergePartialFromCodedStream(
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
                 input, this->mutable_chat_content()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(32)) goto parse_send_userid;
+        break;
+      }
+
+      // required uint32 send_userid = 4;
+      case 4: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+         parse_send_userid:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, &send_userid_)));
+          set_has_send_userid();
         } else {
           goto handle_uninterpreted;
         }
@@ -1079,6 +1572,11 @@ void ChatResponse::SerializeWithCachedSizes(
       3, this->chat_content(), output);
   }
 
+  // required uint32 send_userid = 4;
+  if (has_send_userid()) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt32(4, this->send_userid(), output);
+  }
+
 }
 
 int ChatResponse::ByteSize() const {
@@ -1090,6 +1588,13 @@ int ChatResponse::ByteSize() const {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::BytesSize(
           this->chat_content());
+    }
+
+    // required uint32 send_userid = 4;
+    if (has_send_userid()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::UInt32Size(
+          this->send_userid());
     }
 
   }
@@ -1110,6 +1615,9 @@ void ChatResponse::MergeFrom(const ChatResponse& from) {
     if (from.has_chat_content()) {
       set_chat_content(from.chat_content());
     }
+    if (from.has_send_userid()) {
+      set_send_userid(from.send_userid());
+    }
   }
 }
 
@@ -1120,7 +1628,7 @@ void ChatResponse::CopyFrom(const ChatResponse& from) {
 }
 
 bool ChatResponse::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
+  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
 
   return true;
 }
@@ -1128,6 +1636,7 @@ bool ChatResponse::IsInitialized() const {
 void ChatResponse::Swap(ChatResponse* other) {
   if (other != this) {
     std::swap(chat_content_, other->chat_content_);
+    std::swap(send_userid_, other->send_userid_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     std::swap(_cached_size_, other->_cached_size_);
   }

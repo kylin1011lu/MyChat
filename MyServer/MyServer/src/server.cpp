@@ -35,10 +35,7 @@ void g_sendmsg(SOCKET connfd, MY_MSG_HEAD* msg)
 	if (server->conntable[connfd])
 	{
 		sq_socket* c = server->conntable[connfd];
-		//当发送id==0的消息时，因为是广播给所有线程处理，通常不对其回复消息，但是如果回复消息，就会导致多线程sendmsg的问题
-		//spinlock_lock(&c->send_locker, "sq_socket::sendmsg");
 		c->sendmsg(msg);
-		//spinlock_unlock(&c->send_locker);
 	}
 	//else { error_log("not exist connfd:%d\n", connfd); }
 }
@@ -62,7 +59,7 @@ static server_struct server_table[] =
 		0,
 		"root.user.bind.ip",
 		"root.user.bind.port",
-		8,
+		1,
 		false,
 		".logs",
 		NULL,

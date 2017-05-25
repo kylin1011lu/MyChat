@@ -33,10 +33,37 @@ void protobuf_AssignDesc_common_2eproto();
 void protobuf_ShutdownFile_common_2eproto();
 
 class User;
+class AccountRegisterRequest;
+class AccountRegisterResponse;
 class UserLoginRequest;
 class UserLoginResponse;
 class ChatRequest;
 class ChatResponse;
+
+enum AccountRegisterRequest_MSGID {
+  AccountRegisterRequest_MSGID_ID = 100
+};
+bool AccountRegisterRequest_MSGID_IsValid(int value);
+const AccountRegisterRequest_MSGID AccountRegisterRequest_MSGID_MSGID_MIN = AccountRegisterRequest_MSGID_ID;
+const AccountRegisterRequest_MSGID AccountRegisterRequest_MSGID_MSGID_MAX = AccountRegisterRequest_MSGID_ID;
+const int AccountRegisterRequest_MSGID_MSGID_ARRAYSIZE = AccountRegisterRequest_MSGID_MSGID_MAX + 1;
+
+enum AccountRegisterResponse_MSGID {
+  AccountRegisterResponse_MSGID_ID = 101
+};
+bool AccountRegisterResponse_MSGID_IsValid(int value);
+const AccountRegisterResponse_MSGID AccountRegisterResponse_MSGID_MSGID_MIN = AccountRegisterResponse_MSGID_ID;
+const AccountRegisterResponse_MSGID AccountRegisterResponse_MSGID_MSGID_MAX = AccountRegisterResponse_MSGID_ID;
+const int AccountRegisterResponse_MSGID_MSGID_ARRAYSIZE = AccountRegisterResponse_MSGID_MSGID_MAX + 1;
+
+enum AccountRegisterResponse_RegRetCode {
+  AccountRegisterResponse_RegRetCode_CODE_SUCCESS = 0,
+  AccountRegisterResponse_RegRetCode_CODE_SAME_NAME = 1
+};
+bool AccountRegisterResponse_RegRetCode_IsValid(int value);
+const AccountRegisterResponse_RegRetCode AccountRegisterResponse_RegRetCode_RegRetCode_MIN = AccountRegisterResponse_RegRetCode_CODE_SUCCESS;
+const AccountRegisterResponse_RegRetCode AccountRegisterResponse_RegRetCode_RegRetCode_MAX = AccountRegisterResponse_RegRetCode_CODE_SAME_NAME;
+const int AccountRegisterResponse_RegRetCode_RegRetCode_ARRAYSIZE = AccountRegisterResponse_RegRetCode_RegRetCode_MAX + 1;
 
 enum UserLoginRequest_MSGID {
   UserLoginRequest_MSGID_ID = 102
@@ -167,6 +194,239 @@ class User : public ::google::protobuf::MessageLite {
 
   void InitAsDefaultInstance();
   static User* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class AccountRegisterRequest : public ::google::protobuf::MessageLite {
+ public:
+  AccountRegisterRequest();
+  virtual ~AccountRegisterRequest();
+
+  AccountRegisterRequest(const AccountRegisterRequest& from);
+
+  inline AccountRegisterRequest& operator=(const AccountRegisterRequest& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const AccountRegisterRequest& default_instance();
+
+  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  // Returns the internal default instance pointer. This function can
+  // return NULL thus should not be used by the user. This is intended
+  // for Protobuf internal code. Please use default_instance() declared
+  // above instead.
+  static inline const AccountRegisterRequest* internal_default_instance() {
+    return default_instance_;
+  }
+  #endif
+
+  void Swap(AccountRegisterRequest* other);
+
+  // implements Message ----------------------------------------------
+
+  AccountRegisterRequest* New() const;
+  void CheckTypeAndMergeFrom(const ::google::protobuf::MessageLite& from);
+  void CopyFrom(const AccountRegisterRequest& from);
+  void MergeFrom(const AccountRegisterRequest& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::std::string GetTypeName() const;
+
+  // nested types ----------------------------------------------------
+
+  typedef AccountRegisterRequest_MSGID MSGID;
+  static const MSGID ID = AccountRegisterRequest_MSGID_ID;
+  static inline bool MSGID_IsValid(int value) {
+    return AccountRegisterRequest_MSGID_IsValid(value);
+  }
+  static const MSGID MSGID_MIN =
+    AccountRegisterRequest_MSGID_MSGID_MIN;
+  static const MSGID MSGID_MAX =
+    AccountRegisterRequest_MSGID_MSGID_MAX;
+  static const int MSGID_ARRAYSIZE =
+    AccountRegisterRequest_MSGID_MSGID_ARRAYSIZE;
+
+  // accessors -------------------------------------------------------
+
+  // required bytes register_name = 2;
+  inline bool has_register_name() const;
+  inline void clear_register_name();
+  static const int kRegisterNameFieldNumber = 2;
+  inline const ::std::string& register_name() const;
+  inline void set_register_name(const ::std::string& value);
+  inline void set_register_name(const char* value);
+  inline void set_register_name(const void* value, size_t size);
+  inline ::std::string* mutable_register_name();
+  inline ::std::string* release_register_name();
+  inline void set_allocated_register_name(::std::string* register_name);
+
+  // required bytes register_password = 3;
+  inline bool has_register_password() const;
+  inline void clear_register_password();
+  static const int kRegisterPasswordFieldNumber = 3;
+  inline const ::std::string& register_password() const;
+  inline void set_register_password(const ::std::string& value);
+  inline void set_register_password(const char* value);
+  inline void set_register_password(const void* value, size_t size);
+  inline ::std::string* mutable_register_password();
+  inline ::std::string* release_register_password();
+  inline void set_allocated_register_password(::std::string* register_password);
+
+  // @@protoc_insertion_point(class_scope:message.AccountRegisterRequest)
+ private:
+  inline void set_has_register_name();
+  inline void clear_has_register_name();
+  inline void set_has_register_password();
+  inline void clear_has_register_password();
+
+  ::std::string* register_name_;
+  ::std::string* register_password_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+
+  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  friend void  protobuf_AddDesc_common_2eproto_impl();
+  #else
+  friend void  protobuf_AddDesc_common_2eproto();
+  #endif
+  friend void protobuf_AssignDesc_common_2eproto();
+  friend void protobuf_ShutdownFile_common_2eproto();
+
+  void InitAsDefaultInstance();
+  static AccountRegisterRequest* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class AccountRegisterResponse : public ::google::protobuf::MessageLite {
+ public:
+  AccountRegisterResponse();
+  virtual ~AccountRegisterResponse();
+
+  AccountRegisterResponse(const AccountRegisterResponse& from);
+
+  inline AccountRegisterResponse& operator=(const AccountRegisterResponse& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const AccountRegisterResponse& default_instance();
+
+  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  // Returns the internal default instance pointer. This function can
+  // return NULL thus should not be used by the user. This is intended
+  // for Protobuf internal code. Please use default_instance() declared
+  // above instead.
+  static inline const AccountRegisterResponse* internal_default_instance() {
+    return default_instance_;
+  }
+  #endif
+
+  void Swap(AccountRegisterResponse* other);
+
+  // implements Message ----------------------------------------------
+
+  AccountRegisterResponse* New() const;
+  void CheckTypeAndMergeFrom(const ::google::protobuf::MessageLite& from);
+  void CopyFrom(const AccountRegisterResponse& from);
+  void MergeFrom(const AccountRegisterResponse& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::std::string GetTypeName() const;
+
+  // nested types ----------------------------------------------------
+
+  typedef AccountRegisterResponse_MSGID MSGID;
+  static const MSGID ID = AccountRegisterResponse_MSGID_ID;
+  static inline bool MSGID_IsValid(int value) {
+    return AccountRegisterResponse_MSGID_IsValid(value);
+  }
+  static const MSGID MSGID_MIN =
+    AccountRegisterResponse_MSGID_MSGID_MIN;
+  static const MSGID MSGID_MAX =
+    AccountRegisterResponse_MSGID_MSGID_MAX;
+  static const int MSGID_ARRAYSIZE =
+    AccountRegisterResponse_MSGID_MSGID_ARRAYSIZE;
+
+  typedef AccountRegisterResponse_RegRetCode RegRetCode;
+  static const RegRetCode CODE_SUCCESS = AccountRegisterResponse_RegRetCode_CODE_SUCCESS;
+  static const RegRetCode CODE_SAME_NAME = AccountRegisterResponse_RegRetCode_CODE_SAME_NAME;
+  static inline bool RegRetCode_IsValid(int value) {
+    return AccountRegisterResponse_RegRetCode_IsValid(value);
+  }
+  static const RegRetCode RegRetCode_MIN =
+    AccountRegisterResponse_RegRetCode_RegRetCode_MIN;
+  static const RegRetCode RegRetCode_MAX =
+    AccountRegisterResponse_RegRetCode_RegRetCode_MAX;
+  static const int RegRetCode_ARRAYSIZE =
+    AccountRegisterResponse_RegRetCode_RegRetCode_ARRAYSIZE;
+
+  // accessors -------------------------------------------------------
+
+  // required .message.AccountRegisterResponse.RegRetCode ret_code = 3;
+  inline bool has_ret_code() const;
+  inline void clear_ret_code();
+  static const int kRetCodeFieldNumber = 3;
+  inline ::message::AccountRegisterResponse_RegRetCode ret_code() const;
+  inline void set_ret_code(::message::AccountRegisterResponse_RegRetCode value);
+
+  // required uint32 userid = 4;
+  inline bool has_userid() const;
+  inline void clear_userid();
+  static const int kUseridFieldNumber = 4;
+  inline ::google::protobuf::uint32 userid() const;
+  inline void set_userid(::google::protobuf::uint32 value);
+
+  // @@protoc_insertion_point(class_scope:message.AccountRegisterResponse)
+ private:
+  inline void set_has_ret_code();
+  inline void clear_has_ret_code();
+  inline void set_has_userid();
+  inline void clear_has_userid();
+
+  int ret_code_;
+  ::google::protobuf::uint32 userid_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+
+  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  friend void  protobuf_AddDesc_common_2eproto_impl();
+  #else
+  friend void  protobuf_AddDesc_common_2eproto();
+  #endif
+  friend void protobuf_AssignDesc_common_2eproto();
+  friend void protobuf_ShutdownFile_common_2eproto();
+
+  void InitAsDefaultInstance();
+  static AccountRegisterResponse* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -582,15 +842,25 @@ class ChatResponse : public ::google::protobuf::MessageLite {
   inline ::std::string* release_chat_content();
   inline void set_allocated_chat_content(::std::string* chat_content);
 
+  // required uint32 send_userid = 4;
+  inline bool has_send_userid() const;
+  inline void clear_send_userid();
+  static const int kSendUseridFieldNumber = 4;
+  inline ::google::protobuf::uint32 send_userid() const;
+  inline void set_send_userid(::google::protobuf::uint32 value);
+
   // @@protoc_insertion_point(class_scope:message.ChatResponse)
  private:
   inline void set_has_chat_content();
   inline void clear_has_chat_content();
+  inline void set_has_send_userid();
+  inline void clear_has_send_userid();
 
   ::std::string* chat_content_;
+  ::google::protobuf::uint32 send_userid_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
 
   #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
   friend void  protobuf_AddDesc_common_2eproto_impl();
@@ -700,6 +970,199 @@ inline void User::set_allocated_name(::std::string* name) {
     clear_has_name();
     name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   }
+}
+
+// -------------------------------------------------------------------
+
+// AccountRegisterRequest
+
+// required bytes register_name = 2;
+inline bool AccountRegisterRequest::has_register_name() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void AccountRegisterRequest::set_has_register_name() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void AccountRegisterRequest::clear_has_register_name() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void AccountRegisterRequest::clear_register_name() {
+  if (register_name_ != &::google::protobuf::internal::kEmptyString) {
+    register_name_->clear();
+  }
+  clear_has_register_name();
+}
+inline const ::std::string& AccountRegisterRequest::register_name() const {
+  return *register_name_;
+}
+inline void AccountRegisterRequest::set_register_name(const ::std::string& value) {
+  set_has_register_name();
+  if (register_name_ == &::google::protobuf::internal::kEmptyString) {
+    register_name_ = new ::std::string;
+  }
+  register_name_->assign(value);
+}
+inline void AccountRegisterRequest::set_register_name(const char* value) {
+  set_has_register_name();
+  if (register_name_ == &::google::protobuf::internal::kEmptyString) {
+    register_name_ = new ::std::string;
+  }
+  register_name_->assign(value);
+}
+inline void AccountRegisterRequest::set_register_name(const void* value, size_t size) {
+  set_has_register_name();
+  if (register_name_ == &::google::protobuf::internal::kEmptyString) {
+    register_name_ = new ::std::string;
+  }
+  register_name_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* AccountRegisterRequest::mutable_register_name() {
+  set_has_register_name();
+  if (register_name_ == &::google::protobuf::internal::kEmptyString) {
+    register_name_ = new ::std::string;
+  }
+  return register_name_;
+}
+inline ::std::string* AccountRegisterRequest::release_register_name() {
+  clear_has_register_name();
+  if (register_name_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = register_name_;
+    register_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void AccountRegisterRequest::set_allocated_register_name(::std::string* register_name) {
+  if (register_name_ != &::google::protobuf::internal::kEmptyString) {
+    delete register_name_;
+  }
+  if (register_name) {
+    set_has_register_name();
+    register_name_ = register_name;
+  } else {
+    clear_has_register_name();
+    register_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// required bytes register_password = 3;
+inline bool AccountRegisterRequest::has_register_password() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void AccountRegisterRequest::set_has_register_password() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void AccountRegisterRequest::clear_has_register_password() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void AccountRegisterRequest::clear_register_password() {
+  if (register_password_ != &::google::protobuf::internal::kEmptyString) {
+    register_password_->clear();
+  }
+  clear_has_register_password();
+}
+inline const ::std::string& AccountRegisterRequest::register_password() const {
+  return *register_password_;
+}
+inline void AccountRegisterRequest::set_register_password(const ::std::string& value) {
+  set_has_register_password();
+  if (register_password_ == &::google::protobuf::internal::kEmptyString) {
+    register_password_ = new ::std::string;
+  }
+  register_password_->assign(value);
+}
+inline void AccountRegisterRequest::set_register_password(const char* value) {
+  set_has_register_password();
+  if (register_password_ == &::google::protobuf::internal::kEmptyString) {
+    register_password_ = new ::std::string;
+  }
+  register_password_->assign(value);
+}
+inline void AccountRegisterRequest::set_register_password(const void* value, size_t size) {
+  set_has_register_password();
+  if (register_password_ == &::google::protobuf::internal::kEmptyString) {
+    register_password_ = new ::std::string;
+  }
+  register_password_->assign(reinterpret_cast<const char*>(value), size);
+}
+inline ::std::string* AccountRegisterRequest::mutable_register_password() {
+  set_has_register_password();
+  if (register_password_ == &::google::protobuf::internal::kEmptyString) {
+    register_password_ = new ::std::string;
+  }
+  return register_password_;
+}
+inline ::std::string* AccountRegisterRequest::release_register_password() {
+  clear_has_register_password();
+  if (register_password_ == &::google::protobuf::internal::kEmptyString) {
+    return NULL;
+  } else {
+    ::std::string* temp = register_password_;
+    register_password_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+    return temp;
+  }
+}
+inline void AccountRegisterRequest::set_allocated_register_password(::std::string* register_password) {
+  if (register_password_ != &::google::protobuf::internal::kEmptyString) {
+    delete register_password_;
+  }
+  if (register_password) {
+    set_has_register_password();
+    register_password_ = register_password;
+  } else {
+    clear_has_register_password();
+    register_password_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
+  }
+}
+
+// -------------------------------------------------------------------
+
+// AccountRegisterResponse
+
+// required .message.AccountRegisterResponse.RegRetCode ret_code = 3;
+inline bool AccountRegisterResponse::has_ret_code() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void AccountRegisterResponse::set_has_ret_code() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void AccountRegisterResponse::clear_has_ret_code() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void AccountRegisterResponse::clear_ret_code() {
+  ret_code_ = 0;
+  clear_has_ret_code();
+}
+inline ::message::AccountRegisterResponse_RegRetCode AccountRegisterResponse::ret_code() const {
+  return static_cast< ::message::AccountRegisterResponse_RegRetCode >(ret_code_);
+}
+inline void AccountRegisterResponse::set_ret_code(::message::AccountRegisterResponse_RegRetCode value) {
+  assert(::message::AccountRegisterResponse_RegRetCode_IsValid(value));
+  set_has_ret_code();
+  ret_code_ = value;
+}
+
+// required uint32 userid = 4;
+inline bool AccountRegisterResponse::has_userid() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void AccountRegisterResponse::set_has_userid() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void AccountRegisterResponse::clear_has_userid() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void AccountRegisterResponse::clear_userid() {
+  userid_ = 0u;
+  clear_has_userid();
+}
+inline ::google::protobuf::uint32 AccountRegisterResponse::userid() const {
+  return userid_;
+}
+inline void AccountRegisterResponse::set_userid(::google::protobuf::uint32 value) {
+  set_has_userid();
+  userid_ = value;
 }
 
 // -------------------------------------------------------------------
@@ -1110,6 +1573,28 @@ inline void ChatResponse::set_allocated_chat_content(::std::string* chat_content
     clear_has_chat_content();
     chat_content_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
   }
+}
+
+// required uint32 send_userid = 4;
+inline bool ChatResponse::has_send_userid() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void ChatResponse::set_has_send_userid() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void ChatResponse::clear_has_send_userid() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void ChatResponse::clear_send_userid() {
+  send_userid_ = 0u;
+  clear_has_send_userid();
+}
+inline ::google::protobuf::uint32 ChatResponse::send_userid() const {
+  return send_userid_;
+}
+inline void ChatResponse::set_send_userid(::google::protobuf::uint32 value) {
+  set_has_send_userid();
+  send_userid_ = value;
 }
 
 
