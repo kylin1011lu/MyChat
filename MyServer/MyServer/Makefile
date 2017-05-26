@@ -25,6 +25,9 @@ SOURCES +=	\
 			framework/protocol.cpp \
 			protobuf/common.pb.cc \
 			src/server.cpp \
+			src/sq_msg.cpp \
+			src/sq_record.cpp \
+			src/utility.cpp \
 			src/sq_handler.cpp \
 			src/sq_handler_user.cpp \
 			src/sq_user_client.cpp 
