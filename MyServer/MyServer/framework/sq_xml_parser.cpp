@@ -65,7 +65,7 @@ sq_xml_parser::sq_xml_parser(const char* filename)
 sq_xml_parser::~sq_xml_parser()
 {
 	doc.clear();
-	if (buf) { delete buf; }
+	if (buf) { delete[] buf; }
 }
 bool sq_xml_parser::open(const char* filename)
 {

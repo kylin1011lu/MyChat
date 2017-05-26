@@ -24,7 +24,7 @@ db_filelds db_buf;
 sq_record* sq_record_init()
 {
 	sq_record* record = new sq_record;
-	for (int n = 0; n < 8; ++n)
+	for (int n = 0; n < MAX_DB_NUMBER; ++n)
 	{
 		record->conf[n] = new sq_mysql_config;
 	}
