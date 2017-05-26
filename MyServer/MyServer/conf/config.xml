@@ -3,9 +3,9 @@
 	<server version="0.0.1" APPID="2" APPNAME="MyChat"/>
 	
 	<db num="2">
-		<dba host="127.0.0.1" user="" passwd="" db="mychatacct" port="3306"/>
-		<db0 host="127.0.0.1" user="" passwd="" db="mychat0_n" port="3306"/>
-		<db1 host="127.0.0.1" user="" passwd="" db="mychat1_n" port="3306"/>
+		<dba host="127.0.0.1" user="root" passwd="LUQILIN1011lu;" db="mychatacct" port="3306"/>
+		<db0 host="127.0.0.1" user="root" passwd="LUQILIN1011lu;" db="mychat0_n" port="3306"/>
+		<db1 host="127.0.0.1" user="root" passwd="LUQILIN1011lu;" db="mychat1_n" port="3306"/>
 	</db>
 	
 	<db2 num="2">

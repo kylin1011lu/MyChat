@@ -3,8 +3,8 @@ TARGET	= server
 CC=g++
 CXXFLAGS=
 CPPFLAGS=
-LIBS =  $(PROTOBUF-LITE)
-# LIBS = $(ICONV) $(MYSQL) $(LIBEVENT) $(LUA) $(JSONCPP) $(LUACURL)
+LIBS =  $(PROTOBUF-LITE) $(MYSQL)
+# LIBS = $(ICONV) $(LIBEVENT) $(LUA) $(JSONCPP) $(LUACURL)
 
 INSTALL_DIR = bin
 
@@ -23,6 +23,7 @@ SOURCES +=	\
 			framework/sq_timer.cpp \
 			framework/sq_xml_parser.cpp \
 			framework/protocol.cpp \
+			framework/sq_mysql.cpp \
 			protobuf/common.pb.cc \
 			src/server.cpp \
 			src/sq_msg.cpp \

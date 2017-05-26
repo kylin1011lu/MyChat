@@ -29,6 +29,7 @@ CXXFLAGS += \
 	-I$(ROOT_DIR)/dep/linux/lua/ \
 	-I$(ROOT_DIR)/dep/linux/libevent/ \
 	-I$(ROOT_DIR)/dep/linux/jsoncpp/json/ \
+	-I$(ROOT_DIR)/external/protobuf-lite/ \
 	-I$(ROOT_DIR)/protocol/	\
 	-I$(ROOT_DIR)/protobuf/	\
 	-m64 \

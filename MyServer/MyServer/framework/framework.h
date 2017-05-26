@@ -30,7 +30,7 @@
 #include <winsock2.h>
 #include <ws2tcpip.h>
 #include <io.h>
-
+#include "pthread.h"
 typedef int ssize_t;
 #define strcasecmp stricmp
 #define __gnu_cxx std
@@ -58,8 +58,6 @@ typedef int						SOCKET;
 
 
 //dep include
-#include "pthread.h"
-
 #include "mysql/mysql.h"
 #include "mysql/errmsg.h"
 
