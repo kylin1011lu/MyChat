@@ -59,7 +59,7 @@ static server_struct server_table[] =
 		0,
 		"root.user.bind.ip",
 		"root.user.bind.port",
-		1,
+		MAX_DB_NUMBER,
 		false,
 		".logs",
 		NULL,

@@ -528,6 +528,7 @@ bool AccountRegisterResponse_RegRetCode_IsValid(int value) {
   switch(value) {
     case 0:
     case 1:
+    case 3:
       return true;
     default:
       return false;
@@ -537,6 +538,7 @@ bool AccountRegisterResponse_RegRetCode_IsValid(int value) {
 #ifndef _MSC_VER
 const AccountRegisterResponse_RegRetCode AccountRegisterResponse::CODE_SUCCESS;
 const AccountRegisterResponse_RegRetCode AccountRegisterResponse::CODE_SAME_NAME;
+const AccountRegisterResponse_RegRetCode AccountRegisterResponse::CODE_INSERT_ERROR;
 const AccountRegisterResponse_RegRetCode AccountRegisterResponse::RegRetCode_MIN;
 const AccountRegisterResponse_RegRetCode AccountRegisterResponse::RegRetCode_MAX;
 const int AccountRegisterResponse::RegRetCode_ARRAYSIZE;
@@ -992,8 +994,26 @@ const UserLoginResponse_MSGID UserLoginResponse::MSGID_MIN;
 const UserLoginResponse_MSGID UserLoginResponse::MSGID_MAX;
 const int UserLoginResponse::MSGID_ARRAYSIZE;
 #endif  // _MSC_VER
+bool UserLoginResponse_LoginRetCode_IsValid(int value) {
+  switch(value) {
+    case 0:
+    case 1:
+    case 2:
+      return true;
+    default:
+      return false;
+  }
+}
+
 #ifndef _MSC_VER
-const int UserLoginResponse::kLoginNameFieldNumber;
+const UserLoginResponse_LoginRetCode UserLoginResponse::CODE_SUCCESS;
+const UserLoginResponse_LoginRetCode UserLoginResponse::CODE_ERROR;
+const UserLoginResponse_LoginRetCode UserLoginResponse::CODE_FAILURE;
+const UserLoginResponse_LoginRetCode UserLoginResponse::LoginRetCode_MIN;
+const UserLoginResponse_LoginRetCode UserLoginResponse::LoginRetCode_MAX;
+const int UserLoginResponse::LoginRetCode_ARRAYSIZE;
+#endif  // _MSC_VER
+#ifndef _MSC_VER
 const int UserLoginResponse::kRetCodeFieldNumber;
 const int UserLoginResponse::kUseridFieldNumber;
 #endif  // !_MSC_VER
@@ -1014,8 +1034,7 @@ UserLoginResponse::UserLoginResponse(const UserLoginResponse& from)
 
 void UserLoginResponse::SharedCtor() {
   _cached_size_ = 0;
-  login_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  ret_code_ = 0u;
+  ret_code_ = 0;
   userid_ = 0u;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
@@ -1025,9 +1044,6 @@ UserLoginResponse::~UserLoginResponse() {
 }
 
 void UserLoginResponse::SharedDtor() {
-  if (login_name_ != &::google::protobuf::internal::kEmptyString) {
-    delete login_name_;
-  }
   #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
   if (this != &default_instance()) {
   #else
@@ -1058,12 +1074,7 @@ UserLoginResponse* UserLoginResponse::New() const {
 
 void UserLoginResponse::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (has_login_name()) {
-      if (login_name_ != &::google::protobuf::internal::kEmptyString) {
-        login_name_->clear();
-      }
-    }
-    ret_code_ = 0u;
+    ret_code_ = 0;
     userid_ = 0u;
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
@@ -1075,28 +1086,17 @@ bool UserLoginResponse::MergePartialFromCodedStream(
   ::google::protobuf::uint32 tag;
   while ((tag = input->ReadTag()) != 0) {
     switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required bytes login_name = 2;
-      case 2: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadBytes(
-                input, this->mutable_login_name()));
-        } else {
-          goto handle_uninterpreted;
-        }
-        if (input->ExpectTag(24)) goto parse_ret_code;
-        break;
-      }
-
-      // required uint32 ret_code = 3;
+      // required .message.UserLoginResponse.LoginRetCode ret_code = 3;
       case 3: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
-         parse_ret_code:
+          int value;
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
-                 input, &ret_code_)));
-          set_has_ret_code();
+                   int, ::google::protobuf::internal::WireFormatLite::TYPE_ENUM>(
+                 input, &value)));
+          if (::message::UserLoginResponse_LoginRetCode_IsValid(value)) {
+            set_ret_code(static_cast< ::message::UserLoginResponse_LoginRetCode >(value));
+          }
         } else {
           goto handle_uninterpreted;
         }
@@ -1137,15 +1137,10 @@ bool UserLoginResponse::MergePartialFromCodedStream(
 
 void UserLoginResponse::SerializeWithCachedSizes(
     ::google::protobuf::io::CodedOutputStream* output) const {
-  // required bytes login_name = 2;
-  if (has_login_name()) {
-    ::google::protobuf::internal::WireFormatLite::WriteBytes(
-      2, this->login_name(), output);
-  }
-
-  // required uint32 ret_code = 3;
+  // required .message.UserLoginResponse.LoginRetCode ret_code = 3;
   if (has_ret_code()) {
-    ::google::protobuf::internal::WireFormatLite::WriteUInt32(3, this->ret_code(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteEnum(
+      3, this->ret_code(), output);
   }
 
   // required uint32 userid = 4;
@@ -1159,18 +1154,10 @@ int UserLoginResponse::ByteSize() const {
   int total_size = 0;
 
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required bytes login_name = 2;
-    if (has_login_name()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::BytesSize(
-          this->login_name());
-    }
-
-    // required uint32 ret_code = 3;
+    // required .message.UserLoginResponse.LoginRetCode ret_code = 3;
     if (has_ret_code()) {
       total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::UInt32Size(
-          this->ret_code());
+        ::google::protobuf::internal::WireFormatLite::EnumSize(this->ret_code());
     }
 
     // required uint32 userid = 4;
@@ -1195,9 +1182,6 @@ void UserLoginResponse::CheckTypeAndMergeFrom(
 void UserLoginResponse::MergeFrom(const UserLoginResponse& from) {
   GOOGLE_CHECK_NE(&from, this);
   if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from.has_login_name()) {
-      set_login_name(from.login_name());
-    }
     if (from.has_ret_code()) {
       set_ret_code(from.ret_code());
     }
@@ -1214,14 +1198,13 @@ void UserLoginResponse::CopyFrom(const UserLoginResponse& from) {
 }
 
 bool UserLoginResponse::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000007) != 0x00000007) return false;
+  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
 
   return true;
 }
 
 void UserLoginResponse::Swap(UserLoginResponse* other) {
   if (other != this) {
-    std::swap(login_name_, other->login_name_);
     std::swap(ret_code_, other->ret_code_);
     std::swap(userid_, other->userid_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);

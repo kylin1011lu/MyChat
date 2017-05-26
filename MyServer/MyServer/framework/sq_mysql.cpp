@@ -253,3 +253,8 @@ uint64_t sq_mysql::insert_id()
 	return mysql_stmt_insert_id(this->stmt);
 }
 
+my_ulonglong sq_mysql::affect_rows()
+{
+	return mysql_stmt_affected_rows(this->stmt);
+}
+

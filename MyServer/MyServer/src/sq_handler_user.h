@@ -21,9 +21,8 @@ struct game_user_table
 struct sq_handler_user : public sq_handler
 {
 	sq_handler_user();
+	~sq_handler_user();
 	bool init(int n);
-
-	std::map<int64_t, game_user_table*> m_user_table;
 
 	virtual void		poll();
 
@@ -32,8 +31,7 @@ struct sq_handler_user : public sq_handler
 	void				do_chat_request(const MY_MSG_HEAD* msg);
 private:
 	sq_record*			m_record;
-	sq_record_entry*	m_entry_acct;
-	sq_record_entry*	m_entry_order;
+	sq_record_entry*	m_record_entry;
 };
 
 struct sq_user_task : public sq_task

@@ -37,4 +37,5 @@ struct server_struct
 };
 
 extern server_struct* server;
+
 #endif // !_SERVER_H_

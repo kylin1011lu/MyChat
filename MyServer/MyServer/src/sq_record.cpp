@@ -28,9 +28,8 @@ sq_record* sq_record_init()
 	{
 		record->conf[n] = new sq_mysql_config;
 	}
-	record->init_handle = 1;
 
-	for (int n = 0; n < 8; ++n)
+	for (int n = 0; n < MAX_DB_NUMBER; ++n)
 	{
 		char p[96];
 		snprintf(p, sizeof(p), "root.db.db%d.host", n);
@@ -46,76 +45,19 @@ sq_record* sq_record_init()
 
 		record->conf[n]->init(host, user, passwd, db, port);
 	}
+
+	const char* host = conf.get_value("root.db.dba.host", (const char*)NULL);
+	const char* user = conf.get_value("root.db.dba.user", (const char*)NULL);
+	const char* passwd = conf.get_value("root.db.dba.passwd", (const char*)NULL);
+	const char* db = conf.get_value("root.db.dba.db", (const char*)NULL);
+	int port = conf.get_value("root.db.dba.port", 0);
+
+	record->acct_conf = new sq_mysql_config;
+	record->acct_conf->init(host, user, passwd, db, port);
 	
 	return record;
 }
-sq_record* sq_record_init(const char* conf_file)
-{
-	sq_record* record = new sq_record;
-	for (int n = 0; n < 8; ++n)
-	{
-		record->conf[n] = new sq_mysql_config;
-	}
-	record->init_handle = 1;
 
-	sq_xml_parser* xml_parser = new sq_xml_parser(conf_file);
-
-	xml_node_ptr root = xml_parser->root_node();
-	if (!root) { return NULL; }
-
-	for (int n = 0; n < 8; ++n)
-	{
-		char p[32];
-		snprintf(p, sizeof(p), "db%d", n);
-		xml_node_ptr db_node = xml_parser->child_node(root, p);
-		if (!db_node)
-		{
-			error_log("not found `%s` node\n", p);
-			return NULL;
-		}
-
-		const char* host = xml_parser->node_value_string(db_node, "host");
-		if (!host)
-		{
-			error_log("not found `%s.host` node\n", p);
-			return NULL;
-		}
-
-		const char* user = xml_parser->node_value_string(db_node, "user");
-		if (!user)
-		{
-			error_log("not found `%s.user` node\n", p);
-			return NULL;
-		}
-
-		const char* passwd = xml_parser->node_value_string(db_node, "passwd");
-		if (!passwd)
-		{
-			error_log("not found `%s.passwd` node\n", p);
-			return NULL;
-		}
-
-		const char* db = xml_parser->node_value_string(db_node, "db");
-		if (!db)
-		{
-			error_log("not found `%s.db` node\n", p);
-			return NULL;
-		}
-
-		int port = xml_parser->node_value_int(db_node, "port");
-		if (!port)
-		{
-			error_log("not found `%s.port` node\n", p);
-			return NULL;
-		}
-
-		record->conf[n]->init(host, user, passwd, db, port);
-	}
-
-	SQ_SAFE_DELETE(xml_parser);
-	
-	return record;
-}
 void sq_record_destroy(sq_record* record)
 {
 	SQ_SAFE_DELETE(record);
@@ -124,7 +66,7 @@ void sq_record_destroy(sq_record* record)
 sq_record_entry* sq_record_data_init(sq_record* record, const char* table_name)
 {
 	sq_record_entry* entry = new sq_record_entry;
-	for (int n = 0; n < 8; ++n)
+	for (int n = 0; n < MAX_DB_NUMBER; ++n)
 	{
 		if (!entry->db[n]->open(record->conf[n]))
 		{
@@ -132,13 +74,97 @@ sq_record_entry* sq_record_data_init(sq_record* record, const char* table_name)
 			return 0;
 		}
 	}
-	strncpy(entry->table_name, table_name, sizeof(entry->table_name));
-
-	if (!record->entry_table.insert(std::make_pair(record->init_handle, entry)).second)
+	if (!entry->db_acct->open(record->acct_conf))
 	{
 		delete entry;
 		return 0;
 	}
+	strncpy(entry->acct_table, table_name, sizeof(entry->acct_table));
 
 	return entry;
+}
+
+bool sq_record_data_select(sq_record* record, sq_record_entry* entry, const char* name, char* d, size_t& size)
+{
+	if (!entry)
+	{
+		return false;
+	}
+
+	char buf[960] = { 0 };
+	MYSQL_BIND result[1];
+	unsigned long lengths[1] = { 0 };
+	sq_mysql*db = entry->db_acct;
+
+	snprintf(buf, sizeof(buf), "SELECT name FROM `%s` WHERE name = '%s'", entry->acct_table, name);
+	if (!db->prepare(buf)){ return false; }
+	if (!db->exec()){ return false; }
+
+	memset(result, 0, sizeof(result));
+
+	result[0].buffer_type = MYSQL_TYPE_STRING;
+	result[0].buffer = (char*)d;
+	result[0].buffer_length = size; 
+	result[0].length = &lengths[0];
+
+	if (!db->bind_result(result)){ return false; }
+	if (!db->fetch()) { return false; }
+	if (!db->free_result()) { return false; }
+
+	size = lengths[0];
+	return true;
+}
+
+bool sq_record_data_select(sq_record* record, sq_record_entry* entry, uint32_t id, char* name, char*pwd, size_t& size)
+{
+	if (!entry)
+	{
+		return false;
+	}
+
+	char buf[960] = { 0 };
+	MYSQL_BIND result[2];
+	unsigned long lengths[2] = { 0 };
+	sq_mysql*db = entry->db_acct;
+
+	snprintf(buf, sizeof(buf), "SELECT name,pwd FROM `%s` WHERE id = %d", entry->acct_table, id);
+	if (!db->prepare(buf)){ return false; }
+	if (!db->exec()){ return false; }
+
+	memset(result, 0, sizeof(result));
+
+	result[0].buffer_type = MYSQL_TYPE_STRING;
+	result[0].buffer = (char*)name;
+	result[0].buffer_length = size;
+	result[0].length = &lengths[0];
+
+
+	result[1].buffer_type = MYSQL_TYPE_STRING;
+	result[1].buffer = (char*)pwd;
+	result[1].buffer_length = size;
+	result[1].length = &lengths[1];
+
+	if (!db->bind_result(result)){ return false; }
+	if (!db->fetch()) { return false; }
+	if (!db->free_result()) { return false; }
+
+	size = lengths[0];
+	return true;
+}
+
+bool sq_record_data_insert(sq_record* record, sq_record_entry* entry, uint32_t id, const char* name,const char*pwd)
+{
+	if (!entry)
+	{
+		return false;
+	}
+
+	char buf[960] = {0};
+	sq_mysql*db = entry->db_acct;
+
+	snprintf(buf, sizeof(buf), "INSERT INTO `%s` (id,name,pwd) VALUES(%d,'%s','%s')", entry->acct_table, id,name,pwd);
+	if (!db->prepare(buf)){ return false; }
+	if (!db->exec()){ return false; }
+
+	return true;
 }

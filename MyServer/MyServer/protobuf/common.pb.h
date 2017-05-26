@@ -58,11 +58,12 @@ const int AccountRegisterResponse_MSGID_MSGID_ARRAYSIZE = AccountRegisterRespons
 
 enum AccountRegisterResponse_RegRetCode {
   AccountRegisterResponse_RegRetCode_CODE_SUCCESS = 0,
-  AccountRegisterResponse_RegRetCode_CODE_SAME_NAME = 1
+  AccountRegisterResponse_RegRetCode_CODE_SAME_NAME = 1,
+  AccountRegisterResponse_RegRetCode_CODE_INSERT_ERROR = 3
 };
 bool AccountRegisterResponse_RegRetCode_IsValid(int value);
 const AccountRegisterResponse_RegRetCode AccountRegisterResponse_RegRetCode_RegRetCode_MIN = AccountRegisterResponse_RegRetCode_CODE_SUCCESS;
-const AccountRegisterResponse_RegRetCode AccountRegisterResponse_RegRetCode_RegRetCode_MAX = AccountRegisterResponse_RegRetCode_CODE_SAME_NAME;
+const AccountRegisterResponse_RegRetCode AccountRegisterResponse_RegRetCode_RegRetCode_MAX = AccountRegisterResponse_RegRetCode_CODE_INSERT_ERROR;
 const int AccountRegisterResponse_RegRetCode_RegRetCode_ARRAYSIZE = AccountRegisterResponse_RegRetCode_RegRetCode_MAX + 1;
 
 enum UserLoginRequest_MSGID {
@@ -80,6 +81,16 @@ bool UserLoginResponse_MSGID_IsValid(int value);
 const UserLoginResponse_MSGID UserLoginResponse_MSGID_MSGID_MIN = UserLoginResponse_MSGID_ID;
 const UserLoginResponse_MSGID UserLoginResponse_MSGID_MSGID_MAX = UserLoginResponse_MSGID_ID;
 const int UserLoginResponse_MSGID_MSGID_ARRAYSIZE = UserLoginResponse_MSGID_MSGID_MAX + 1;
+
+enum UserLoginResponse_LoginRetCode {
+  UserLoginResponse_LoginRetCode_CODE_SUCCESS = 0,
+  UserLoginResponse_LoginRetCode_CODE_ERROR = 1,
+  UserLoginResponse_LoginRetCode_CODE_FAILURE = 2
+};
+bool UserLoginResponse_LoginRetCode_IsValid(int value);
+const UserLoginResponse_LoginRetCode UserLoginResponse_LoginRetCode_LoginRetCode_MIN = UserLoginResponse_LoginRetCode_CODE_SUCCESS;
+const UserLoginResponse_LoginRetCode UserLoginResponse_LoginRetCode_LoginRetCode_MAX = UserLoginResponse_LoginRetCode_CODE_FAILURE;
+const int UserLoginResponse_LoginRetCode_LoginRetCode_ARRAYSIZE = UserLoginResponse_LoginRetCode_LoginRetCode_MAX + 1;
 
 enum ChatRequest_MSGID {
   ChatRequest_MSGID_ID = 104
@@ -378,6 +389,7 @@ class AccountRegisterResponse : public ::google::protobuf::MessageLite {
   typedef AccountRegisterResponse_RegRetCode RegRetCode;
   static const RegRetCode CODE_SUCCESS = AccountRegisterResponse_RegRetCode_CODE_SUCCESS;
   static const RegRetCode CODE_SAME_NAME = AccountRegisterResponse_RegRetCode_CODE_SAME_NAME;
+  static const RegRetCode CODE_INSERT_ERROR = AccountRegisterResponse_RegRetCode_CODE_INSERT_ERROR;
   static inline bool RegRetCode_IsValid(int value) {
     return AccountRegisterResponse_RegRetCode_IsValid(value);
   }
@@ -608,26 +620,28 @@ class UserLoginResponse : public ::google::protobuf::MessageLite {
   static const int MSGID_ARRAYSIZE =
     UserLoginResponse_MSGID_MSGID_ARRAYSIZE;
 
+  typedef UserLoginResponse_LoginRetCode LoginRetCode;
+  static const LoginRetCode CODE_SUCCESS = UserLoginResponse_LoginRetCode_CODE_SUCCESS;
+  static const LoginRetCode CODE_ERROR = UserLoginResponse_LoginRetCode_CODE_ERROR;
+  static const LoginRetCode CODE_FAILURE = UserLoginResponse_LoginRetCode_CODE_FAILURE;
+  static inline bool LoginRetCode_IsValid(int value) {
+    return UserLoginResponse_LoginRetCode_IsValid(value);
+  }
+  static const LoginRetCode LoginRetCode_MIN =
+    UserLoginResponse_LoginRetCode_LoginRetCode_MIN;
+  static const LoginRetCode LoginRetCode_MAX =
+    UserLoginResponse_LoginRetCode_LoginRetCode_MAX;
+  static const int LoginRetCode_ARRAYSIZE =
+    UserLoginResponse_LoginRetCode_LoginRetCode_ARRAYSIZE;
+
   // accessors -------------------------------------------------------
 
-  // required bytes login_name = 2;
-  inline bool has_login_name() const;
-  inline void clear_login_name();
-  static const int kLoginNameFieldNumber = 2;
-  inline const ::std::string& login_name() const;
-  inline void set_login_name(const ::std::string& value);
-  inline void set_login_name(const char* value);
-  inline void set_login_name(const void* value, size_t size);
-  inline ::std::string* mutable_login_name();
-  inline ::std::string* release_login_name();
-  inline void set_allocated_login_name(::std::string* login_name);
-
-  // required uint32 ret_code = 3;
+  // required .message.UserLoginResponse.LoginRetCode ret_code = 3;
   inline bool has_ret_code() const;
   inline void clear_ret_code();
   static const int kRetCodeFieldNumber = 3;
-  inline ::google::protobuf::uint32 ret_code() const;
-  inline void set_ret_code(::google::protobuf::uint32 value);
+  inline ::message::UserLoginResponse_LoginRetCode ret_code() const;
+  inline void set_ret_code(::message::UserLoginResponse_LoginRetCode value);
 
   // required uint32 userid = 4;
   inline bool has_userid() const;
@@ -638,19 +652,16 @@ class UserLoginResponse : public ::google::protobuf::MessageLite {
 
   // @@protoc_insertion_point(class_scope:message.UserLoginResponse)
  private:
-  inline void set_has_login_name();
-  inline void clear_has_login_name();
   inline void set_has_ret_code();
   inline void clear_has_ret_code();
   inline void set_has_userid();
   inline void clear_has_userid();
 
-  ::std::string* login_name_;
-  ::google::protobuf::uint32 ret_code_;
+  int ret_code_;
   ::google::protobuf::uint32 userid_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
 
   #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
   friend void  protobuf_AddDesc_common_2eproto_impl();
@@ -1313,107 +1324,38 @@ inline void UserLoginRequest::set_allocated_login_password(::std::string* login_
 
 // UserLoginResponse
 
-// required bytes login_name = 2;
-inline bool UserLoginResponse::has_login_name() const {
+// required .message.UserLoginResponse.LoginRetCode ret_code = 3;
+inline bool UserLoginResponse::has_ret_code() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void UserLoginResponse::set_has_login_name() {
+inline void UserLoginResponse::set_has_ret_code() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void UserLoginResponse::clear_has_login_name() {
+inline void UserLoginResponse::clear_has_ret_code() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void UserLoginResponse::clear_login_name() {
-  if (login_name_ != &::google::protobuf::internal::kEmptyString) {
-    login_name_->clear();
-  }
-  clear_has_login_name();
-}
-inline const ::std::string& UserLoginResponse::login_name() const {
-  return *login_name_;
-}
-inline void UserLoginResponse::set_login_name(const ::std::string& value) {
-  set_has_login_name();
-  if (login_name_ == &::google::protobuf::internal::kEmptyString) {
-    login_name_ = new ::std::string;
-  }
-  login_name_->assign(value);
-}
-inline void UserLoginResponse::set_login_name(const char* value) {
-  set_has_login_name();
-  if (login_name_ == &::google::protobuf::internal::kEmptyString) {
-    login_name_ = new ::std::string;
-  }
-  login_name_->assign(value);
-}
-inline void UserLoginResponse::set_login_name(const void* value, size_t size) {
-  set_has_login_name();
-  if (login_name_ == &::google::protobuf::internal::kEmptyString) {
-    login_name_ = new ::std::string;
-  }
-  login_name_->assign(reinterpret_cast<const char*>(value), size);
-}
-inline ::std::string* UserLoginResponse::mutable_login_name() {
-  set_has_login_name();
-  if (login_name_ == &::google::protobuf::internal::kEmptyString) {
-    login_name_ = new ::std::string;
-  }
-  return login_name_;
-}
-inline ::std::string* UserLoginResponse::release_login_name() {
-  clear_has_login_name();
-  if (login_name_ == &::google::protobuf::internal::kEmptyString) {
-    return NULL;
-  } else {
-    ::std::string* temp = login_name_;
-    login_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-    return temp;
-  }
-}
-inline void UserLoginResponse::set_allocated_login_name(::std::string* login_name) {
-  if (login_name_ != &::google::protobuf::internal::kEmptyString) {
-    delete login_name_;
-  }
-  if (login_name) {
-    set_has_login_name();
-    login_name_ = login_name;
-  } else {
-    clear_has_login_name();
-    login_name_ = const_cast< ::std::string*>(&::google::protobuf::internal::kEmptyString);
-  }
-}
-
-// required uint32 ret_code = 3;
-inline bool UserLoginResponse::has_ret_code() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void UserLoginResponse::set_has_ret_code() {
-  _has_bits_[0] |= 0x00000002u;
-}
-inline void UserLoginResponse::clear_has_ret_code() {
-  _has_bits_[0] &= ~0x00000002u;
-}
 inline void UserLoginResponse::clear_ret_code() {
-  ret_code_ = 0u;
+  ret_code_ = 0;
   clear_has_ret_code();
 }
-inline ::google::protobuf::uint32 UserLoginResponse::ret_code() const {
-  return ret_code_;
+inline ::message::UserLoginResponse_LoginRetCode UserLoginResponse::ret_code() const {
+  return static_cast< ::message::UserLoginResponse_LoginRetCode >(ret_code_);
 }
-inline void UserLoginResponse::set_ret_code(::google::protobuf::uint32 value) {
+inline void UserLoginResponse::set_ret_code(::message::UserLoginResponse_LoginRetCode value) {
+  assert(::message::UserLoginResponse_LoginRetCode_IsValid(value));
   set_has_ret_code();
   ret_code_ = value;
 }
 
 // required uint32 userid = 4;
 inline bool UserLoginResponse::has_userid() const {
-  return (_has_bits_[0] & 0x00000004u) != 0;
+  return (_has_bits_[0] & 0x00000002u) != 0;
 }
 inline void UserLoginResponse::set_has_userid() {
-  _has_bits_[0] |= 0x00000004u;
+  _has_bits_[0] |= 0x00000002u;
 }
 inline void UserLoginResponse::clear_has_userid() {
-  _has_bits_[0] &= ~0x00000004u;
+  _has_bits_[0] &= ~0x00000002u;
 }
 inline void UserLoginResponse::clear_userid() {
   userid_ = 0u;

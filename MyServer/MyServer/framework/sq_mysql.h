@@ -59,6 +59,7 @@ struct sq_mysql
 	bool 							fetch();
 	bool 							free_result();
 	uint64_t						insert_id();
+	my_ulonglong					affect_rows();
 };
 
 #endif
