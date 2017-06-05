@@ -152,6 +152,41 @@ bool sq_record_data_select(sq_record* record, sq_record_entry* entry, uint32_t i
 	return true;
 }
 
+bool sq_record_data_select(sq_record* record, sq_record_entry* entry, uint32_t last_time)
+{
+	if (!entry)
+	{
+		return false;
+	}
+	char buf[960] = { 0 };
+	MYSQL_BIND result[3];
+	unsigned long lengths[3] = { 0 };
+
+	sq_mysql*db = entry->db[1%MAX_DB_NUMBER];
+
+	snprintf(buf, sizeof(buf), "SELECT send_userid,send_time,chat_content FROM `message` WHERE `send_time` <= %d", last_time);
+	if (!db->prepare(buf)){ return false; }
+	if (!db->exec()){ return false; }
+
+	memset(result, 0, sizeof(result));
+
+	result[0].buffer_type = MYSQL_TYPE_LONG;
+	result[0].buffer = (char*)name;
+	result[0].buffer_length = size;
+	result[0].length = &lengths[0];
+
+
+	result[1].buffer_type = MYSQL_TYPE_TIMESTAMP;
+	result[1].buffer = (char*)pwd;
+	result[1].buffer_length = size;
+	result[1].length = &lengths[1];
+
+	result[2].buffer_type = MYSQL_TYPE_STRING;
+	result[2].buffer = (char*)pwd;
+	result[2].buffer_length = size;
+	result[2].length = &lengths[2];
+}
+
 bool sq_record_data_insert(sq_record* record, sq_record_entry* entry, uint32_t id, const char* name,const char*pwd)
 {
 	if (!entry)
@@ -163,6 +198,23 @@ bool sq_record_data_insert(sq_record* record, sq_record_entry* entry, uint32_t i
 	sq_mysql*db = entry->db_acct;
 
 	snprintf(buf, sizeof(buf), "INSERT INTO `%s` (id,name,pwd) VALUES(%d,'%s','%s')", entry->acct_table, id,name,pwd);
+	if (!db->prepare(buf)){ return false; }
+	if (!db->exec()){ return false; }
+
+	return true;
+}
+
+bool sq_record_data_insert(sq_record* record, sq_record_entry* entry, uint32_t id, const char* chat_content)
+{
+	if (!entry)
+	{
+		return false;
+	}
+
+	char buf[960] = { 0 };
+	sq_mysql*db = entry->db[id%MAX_DB_NUMBER];
+
+	snprintf(buf, sizeof(buf), "INSERT INTO `message` (send_userid,send_time,chat_content) VALUES(%d,now(),'%s')", id, chat_content);
 	if (!db->prepare(buf)){ return false; }
 	if (!db->exec()){ return false; }
 

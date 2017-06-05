@@ -28,6 +28,7 @@ sq_handler_user::sq_handler_user()
 	REGISTER_MSG_HANDLER(sq_handler_user, do_acct_register, message::AccountRegisterRequest::ID);
 	REGISTER_MSG_HANDLER(sq_handler_user, do_user_login, message::UserLoginRequest::ID);
 	REGISTER_MSG_HANDLER(sq_handler_user, do_chat_request, message::ChatRequest::ID);
+	REGISTER_MSG_HANDLER(sq_handler_user, do_chat_history_request, message::ChatHistoryRequest::ID);
 
 }
 
@@ -173,10 +174,16 @@ void sq_handler_user::do_chat_request(const MY_MSG_HEAD* msghead)
 	message::ChatRequest *request = (message::ChatRequest *)msghead->msg;
 	debug_log("do_chat_request->chat_content:%s\n", request->chat_content().c_str());
 
+	if (!sq_record_data_insert(m_record,m_record_entry,msghead->userid,request->chat_content().c_str()))
+	{
+		error_log("do_chat_request->sq_record_data_insert error");
+	}
 	message::ChatResponse response;
 
-	response.set_chat_content(request->chat_content());
-	response.set_send_userid(msghead->userid);
+	message::MessageInfo *info = response.add_message();
+	info->set_chat_content(request->chat_content());
+	info->set_send_userid(msghead->userid);
+	info->set_send_time(time(0));
 
 	MY_MSG_HEAD resmsg;
 	resmsg.msgid = message::ChatResponse::ID;
@@ -192,4 +199,17 @@ void sq_handler_user::do_chat_request(const MY_MSG_HEAD* msghead)
 	}
 
 	//server->sendmsg(msghead->s, &resmsg);
+}
+
+void sq_handler_user::do_chat_history_request(const MY_MSG_HEAD* msghead)
+{
+	message::ChatHistoryRequest *request = (message::ChatHistoryRequest *)msghead->msg;
+	debug_log("do_chat_history_request->last_time:%d\n", request->last_time());
+
+	message::ChatHistoryResponse response;
+
+	message::MessageInfo *info = response.add_message();
+	info->set_chat_content(request->chat_content());
+	info->set_send_userid(msghead->userid);
+	info->set_send_time(time(0));
 }
