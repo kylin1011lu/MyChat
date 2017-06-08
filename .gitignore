@@ -2,8 +2,14 @@
 *.opensdf
 bin
 Debug
+Debug.win32
 *.psess
 *.vsp
 *.d
 *.o
+*.sdf
+*.db
+runtime
+simulator
+cocos2d-x
 
