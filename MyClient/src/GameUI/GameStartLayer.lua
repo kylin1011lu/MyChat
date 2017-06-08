@@ -9,12 +9,6 @@ function GameStartLayer:onCreate()
 	--connect server
 	sNetworkManager.connectServer()
 
-	local sp = cc.Sprite:create("Images/countdown.png")
-
-	local action = cc.JumpBy:create(0.5,cc.p(0,10),50,5)
-
-	sp:runAction(action)
-
 	-- local layer = require("GameUI.ContentLayer")
 
 	-- local str = "字重粗细不均、缺字是家常便饭——可\n字体破线、造形太烂而不能放大使用；字重粗细不均、缺字是家常便饭——可是再烂的字体设计师还得要买，"
