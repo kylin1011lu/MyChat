@@ -208,8 +208,12 @@ void sq_handler_user::do_chat_history_request(const MY_MSG_HEAD* msghead)
 
 	message::ChatHistoryResponse response;
 
+	if (!sq_record_data_select(m_record,m_record_entry,request->last_time()))
+	{
+	}
+
 	message::MessageInfo *info = response.add_message();
-	info->set_chat_content(request->chat_content());
+	//info->set_chat_content(request->chat_content());
 	info->set_send_userid(msghead->userid);
 	info->set_send_time(time(0));
 }

@@ -223,6 +223,15 @@ bool sq_mysql::fetch()
 	}
 	return true;
 }
+int sq_mysql::continue_fetch()
+{
+	int rslt = mysql_stmt_fetch(this->stmt);
+	if (rslt != 0)
+	{
+		error_log("continue_fetch->rslt:%d\n", rslt);
+	}
+	return rslt;
+}
 bool sq_mysql::free_result()
 {
 	if (mysql_stmt_free_result(this->stmt))

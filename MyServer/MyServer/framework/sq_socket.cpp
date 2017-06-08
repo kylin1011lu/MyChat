@@ -113,6 +113,10 @@ bool handle_buffer(sq_socket* c)
 		msg = new message::ChatRequest();
 		msg->ParseFromArray(&pkBuf[MY_MSG_HEAD_SIZE], msg_size - MY_MSG_HEAD_SIZE);
 		break;
+	case message::ChatHistoryRequest::ID:
+		msg = new message::ChatHistoryRequest();
+		msg->ParseFromArray(&pkBuf[MY_MSG_HEAD_SIZE], msg_size - MY_MSG_HEAD_SIZE);
+		break;
 	default:
 		error_log("%d,msg is found\n", msghead->msgid);
 		break;

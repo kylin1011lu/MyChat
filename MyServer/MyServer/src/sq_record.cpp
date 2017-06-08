@@ -158,33 +158,54 @@ bool sq_record_data_select(sq_record* record, sq_record_entry* entry, uint32_t l
 	{
 		return false;
 	}
-	char buf[960] = { 0 };
+	char buf[960] = { 0 };// "SELECT send_userid,send_time,chat_content FROM message WHERE send_time <= \"2017-06-01\"";
 	MYSQL_BIND result[3];
 	unsigned long lengths[3] = { 0 };
 
+	int useid;
+	MYSQL_TIME ts;
+	char content[CHAT_CONTENT_SIZE];
+
+	struct tm _tm;
+	time_t t = last_time;
+	localtime_r(&t, &_tm);
+
 	sq_mysql*db = entry->db[1%MAX_DB_NUMBER];
 
-	snprintf(buf, sizeof(buf), "SELECT send_userid,send_time,chat_content FROM `message` WHERE `send_time` <= %d", last_time);
+	snprintf(buf, sizeof(buf), "SELECT send_userid,send_time,chat_content FROM message WHERE send_time <= \"%04d-%02d-%02d %02d:%02d:%02d\"", _tm.tm_year+1900, _tm.tm_mon+1, _tm.tm_mday, _tm.tm_hour, _tm.tm_min, _tm.tm_sec);
 	if (!db->prepare(buf)){ return false; }
 	if (!db->exec()){ return false; }
 
 	memset(result, 0, sizeof(result));
 
 	result[0].buffer_type = MYSQL_TYPE_LONG;
-	result[0].buffer = (char*)name;
-	result[0].buffer_length = size;
+	result[0].buffer = (char*)&useid;
 	result[0].length = &lengths[0];
 
 
 	result[1].buffer_type = MYSQL_TYPE_TIMESTAMP;
-	result[1].buffer = (char*)pwd;
-	result[1].buffer_length = size;
+	result[1].buffer = (char*)&ts;
 	result[1].length = &lengths[1];
 
 	result[2].buffer_type = MYSQL_TYPE_STRING;
-	result[2].buffer = (char*)pwd;
-	result[2].buffer_length = size;
+	result[2].buffer = (char*)content;
+	result[2].buffer_length = CHAT_CONTENT_SIZE;
 	result[2].length = &lengths[2];
+
+	if (!db->bind_result(result)){ return false; }
+	
+	while (!db->continue_fetch())
+	{
+		debug_log("%d(%ld) ", useid, lengths[0]);
+		debug_log(" %04d-%02d-%02d %02d:%02d:%02d (%ld)",
+			ts.year, ts.month, ts.day,
+			ts.hour, ts.minute, ts.second, lengths[1]);
+		debug_log(" %s(%ld)\n", content, lengths[2]);
+	}
+
+	if (!db->free_result()) { return false; }
+
+	return true;
 }
 
 bool sq_record_data_insert(sq_record* record, sq_record_entry* entry, uint32_t id, const char* name,const char*pwd)

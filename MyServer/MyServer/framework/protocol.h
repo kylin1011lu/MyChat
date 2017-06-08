@@ -23,20 +23,8 @@ typedef const char			*LPCSTR, *PCSTR;
 #endif
 
 #define APP_ID									2
-#define APP_NAME								"iPart2"
+#define APP_NAME								"MyChat"
 
-#define PLATFORM_ANDROID_YOUQUDAO				1	//有趣�?
-#define PLATFORM_ANDROID_360					2	//360
-#define PLATFORM_ANDROID_WANDOUJIA				3	//豌豆�?
-#define PLATFORM_ANDROID_UC						4	//UC
-#define PLATFORM_ANDROID_DOWNJOY				5	//当乐
-#define PLATFORM_IOS_PP							6	//IOS-PP
-#define PLATFORM_ANDROID_MI						7	//小米
-#define PLATFORM_IOS							8	//IOS
-#define PLATFORM_ANDROID_91						9	//91
-#define PLATFORM_IOS_91							10	//ios-91
-#define PLATFORM_ANDROID_DUOKU					11	//多酷
-#define PLATFORM_ANDROID_HUAWEI					12	//华为
 
 #define MAX_NETWORK_PACKAGE_SIZE                (0xffff * 4)
 #define MAX_DOMAIN_SIZE							64
@@ -44,10 +32,11 @@ typedef const char			*LPCSTR, *PCSTR;
 #define ANDROID_ORDER_ID_LENGTH					64
 #define ANDROID_RECEIPT_LENGTH					1024
 
-#define MY_MSG_HEAD_SIZE_INDEX					(sizeof(((MY_MSG_HEAD*)0)->msgid) + sizeof(((MY_MSG_HEAD*)0)->userid))		//消息头结构体消息长度开始位�?
-#define MY_MSG_HEAD_CMD_INDEX					0																//消息头结构体消息id开始位�?
+#define MY_MSG_HEAD_SIZE_INDEX					(sizeof(((MY_MSG_HEAD*)0)->msgid) + sizeof(((MY_MSG_HEAD*)0)->userid))		
+#define MY_MSG_HEAD_CMD_INDEX					0																
 #define MY_MSG_HEAD_SIZE						(MY_MSG_HEAD_SIZE_INDEX + sizeof(((MY_MSG_HEAD*)0)->size))
 
+#define CHAT_CONTENT_SIZE						1024
 typedef ::google::protobuf::MessageLite			mymsg;
 enum
 {

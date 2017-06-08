@@ -57,6 +57,7 @@ struct sq_mysql
 	bool 							exec();
 	bool 							bind_result(MYSQL_BIND* b);
 	bool 							fetch();
+	int 							continue_fetch();
 	bool 							free_result();
 	uint64_t						insert_id();
 	my_ulonglong					affect_rows();
