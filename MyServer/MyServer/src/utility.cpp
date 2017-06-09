@@ -1,6 +1,8 @@
 #include "framework.h"
 #include "utility.h"
 
+static unsigned int s_seed = (unsigned int)time((time_t*)0);
+
 const char* createUUID()
 {
 	return randomString(8, true, false);
@@ -77,4 +79,27 @@ uint32_t hashString(const char* s, size_t size)
 uint32_t generateUUID()
 {
 	return hashString(createUUID());
+}
+
+unsigned long sql_mktime(const MYSQL_TIME tm)
+{
+	unsigned int year = tm.year;
+	unsigned int mon = tm.month;
+	unsigned int day = tm.day;
+	unsigned int hour = tm.hour;
+	unsigned int min = tm.minute;
+	unsigned int sec = tm.second;
+
+	/* 1..12 -> 11,12,1..10 */
+	if (0 >= (int)(mon -= 2)) {
+		mon += 12;  /* Puts Feb last since it has leap day */
+		year -= 1;
+	}
+
+	return ((((unsigned long)
+		(year / 4 - year / 100 + year / 400 + 367 * mon / 12 + day) +
+		year * 365 - 719499
+		) * 24 + hour /* now have hours */
+		) * 60 + min /* now have minutes */
+		) * 60 + sec; /* finally seconds */
 }

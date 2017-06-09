@@ -228,7 +228,7 @@ int sq_mysql::continue_fetch()
 	int rslt = mysql_stmt_fetch(this->stmt);
 	if (rslt != 0)
 	{
-		error_log("continue_fetch->rslt:%d\n", rslt);
+		//error_log("continue_fetch->rslt:%d\n", rslt);
 	}
 	return rslt;
 }

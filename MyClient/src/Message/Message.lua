@@ -56,6 +56,8 @@ msg_handler_table =
         [103]      =        function(self,data) if self.doUserLogin then  self:doUserLogin(data) end end,
         --聊天
         [105]      =        function(self,data) if self.doChatResponse then  self:doChatResponse(data) end end,
+        --聊天历史
+        [107]      =        function(self,data) if self.doChatHistoryResponse then  self:doChatHistoryResponse(data) end end,
 }
 
 proto_msg_table =
@@ -63,6 +65,7 @@ proto_msg_table =
     [101] = "message.AccountRegisterResponse",
     [103] = "message.UserLoginResponse",
     [105] = "message.ChatResponse",
+    [107] = "message.ChatHistoryResponse",
 }
 
 function cc.exports.notifyUIUpdate(funcName,data)

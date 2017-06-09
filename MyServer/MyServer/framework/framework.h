@@ -101,7 +101,7 @@ typedef int						SOCKET;
 
 //src include
 #include "common.pb.h"
-
+#include "utility.h"
 
 
 

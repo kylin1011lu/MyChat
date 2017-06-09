@@ -1,7 +1,6 @@
 #include "framework.h"
 #include "server.h"
 #include "sq_handler_user.h"
-#include "utility.h"
 
 std::map<int64_t, game_user_table*> m_user_online_table;
 
@@ -208,12 +207,14 @@ void sq_handler_user::do_chat_history_request(const MY_MSG_HEAD* msghead)
 
 	message::ChatHistoryResponse response;
 
-	if (!sq_record_data_select(m_record,m_record_entry,request->last_time()))
+	if (!sq_record_data_select(m_record,m_record_entry,request->last_time(),response))
 	{
+		error_log("do_chat_history_request->sq_record_data_select error");
 	}
+	MY_MSG_HEAD resmsg;
+	resmsg.msgid = message::ChatResponse::ID;
+	resmsg.msg = &response;
+	resmsg.userid = msghead->userid;
 
-	message::MessageInfo *info = response.add_message();
-	//info->set_chat_content(request->chat_content());
-	info->set_send_userid(msghead->userid);
-	info->set_send_time(time(0));
+	server->sendmsg(msghead->s, &resmsg);
 }

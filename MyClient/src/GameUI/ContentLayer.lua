@@ -45,7 +45,8 @@ function ContentLayer:onCreate()
     self.tableView:registerScriptHandler(function(table,idx) return self:cellSizeForTable(table,idx) end,cc.TABLECELL_SIZE_FOR_INDEX)
     self.tableView:registerScriptHandler(function(table,idx) return self:tableCellAtIndex(table,idx) end,cc.TABLECELL_SIZE_AT_INDEX)
     self.tableView:reloadData()
-    
+
+    self:RequestChatHistory()
 end
 
 function ContentLayer.scrollViewDidScroll(view)
@@ -85,6 +86,10 @@ function ContentLayer.numberOfCellsInTableView(table)
 end
 
 function ContentLayer:RefreshTableView()
+
+	table.sort(all_msg,function ( a,b )
+		return a.send_time < b.send_time;
+	end)
 
 	self.tableView:reloadData()
 	local size = self.tableView:getContentSize()
@@ -202,12 +207,25 @@ end
 
 
 --------
+
+function ContentLayer:RequestChatHistory()
+    local request =
+    {
+        last_time = os.time(),
+    }
+
+    local code = pb.encode("message.ChatHistoryRequest",request)
+    sendMsg(106,code)
+end
+
+function ContentLayer:doChatHistoryResponse(data)
+ 	self:ParseMessage(data)
+ 	self:RefreshTableView()
+end
+
 function ContentLayer:doChatResponse(data)
-	local userid = USERDEFAULT:getIntegerForKey(KEY_USERID,0)
-    local layer = sLayerManager:getLayerByName("ContentLayer")
 
  	self:ParseMessage(data)
-
  	self:RefreshTableView()
 end
 
@@ -228,7 +246,7 @@ function ContentLayer:ParseMessage(data)
 				send_time = msg.send_time,
 				isread = true
 			}
-
+			printInfo(msg.send_userid.. " "..os.date("%Y-%m-%d %H:%M:%S",msg.send_time).. " "..msg.chat_content)
 			table.insert(all_msg,1,onemsg)
     	end
     end

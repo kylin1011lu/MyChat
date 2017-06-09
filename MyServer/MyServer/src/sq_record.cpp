@@ -52,8 +52,8 @@ sq_record* sq_record_init()
 	const char* db = conf.get_value("root.db.dba.db", (const char*)NULL);
 	int port = conf.get_value("root.db.dba.port", 0);
 
-	record->acct_conf = new sq_mysql_config;
-	record->acct_conf->init(host, user, passwd, db, port);
+	record->main_conf = new sq_mysql_config;
+	record->main_conf->init(host, user, passwd, db, port);
 	
 	return record;
 }
@@ -74,7 +74,7 @@ sq_record_entry* sq_record_data_init(sq_record* record, const char* table_name)
 			return 0;
 		}
 	}
-	if (!entry->db_acct->open(record->acct_conf))
+	if (!entry->db_main->open(record->main_conf))
 	{
 		delete entry;
 		return 0;
@@ -94,7 +94,7 @@ bool sq_record_data_select(sq_record* record, sq_record_entry* entry, const char
 	char buf[960] = { 0 };
 	MYSQL_BIND result[1];
 	unsigned long lengths[1] = { 0 };
-	sq_mysql*db = entry->db_acct;
+	sq_mysql*db = entry->db_main;
 
 	snprintf(buf, sizeof(buf), "SELECT name FROM `%s` WHERE name = '%s'", entry->acct_table, name);
 	if (!db->prepare(buf)){ return false; }
@@ -125,7 +125,7 @@ bool sq_record_data_select(sq_record* record, sq_record_entry* entry, uint32_t i
 	char buf[960] = { 0 };
 	MYSQL_BIND result[2];
 	unsigned long lengths[2] = { 0 };
-	sq_mysql*db = entry->db_acct;
+	sq_mysql*db = entry->db_main;
 
 	snprintf(buf, sizeof(buf), "SELECT name,pwd FROM `%s` WHERE id = %d", entry->acct_table, id);
 	if (!db->prepare(buf)){ return false; }
@@ -152,7 +152,7 @@ bool sq_record_data_select(sq_record* record, sq_record_entry* entry, uint32_t i
 	return true;
 }
 
-bool sq_record_data_select(sq_record* record, sq_record_entry* entry, uint32_t last_time)
+bool sq_record_data_select(sq_record* record, sq_record_entry* entry, uint32_t last_time, message::ChatHistoryResponse & response)
 {
 	if (!entry)
 	{
@@ -170,7 +170,9 @@ bool sq_record_data_select(sq_record* record, sq_record_entry* entry, uint32_t l
 	time_t t = last_time;
 	localtime_r(&t, &_tm);
 
-	sq_mysql*db = entry->db[1%MAX_DB_NUMBER];
+	mktime(&_tm);
+
+	sq_mysql*db = entry->db_main;
 
 	snprintf(buf, sizeof(buf), "SELECT send_userid,send_time,chat_content FROM message WHERE send_time <= \"%04d-%02d-%02d %02d:%02d:%02d\" ORDER BY send_time DESC", _tm.tm_year+1900, _tm.tm_mon+1, _tm.tm_mday, _tm.tm_hour, _tm.tm_min, _tm.tm_sec);
 	if (!db->prepare(buf)){ return false; }
@@ -181,7 +183,6 @@ bool sq_record_data_select(sq_record* record, sq_record_entry* entry, uint32_t l
 	result[0].buffer_type = MYSQL_TYPE_LONG;
 	result[0].buffer = (char*)&useid;
 	result[0].length = &lengths[0];
-
 
 	result[1].buffer_type = MYSQL_TYPE_TIMESTAMP;
 	result[1].buffer = (char*)&ts;
@@ -194,13 +195,19 @@ bool sq_record_data_select(sq_record* record, sq_record_entry* entry, uint32_t l
 
 	if (!db->bind_result(result)){ return false; }
 	
+	struct tm chat_time;
+
 	while (!db->continue_fetch())
 	{
-		debug_log("%d(%ld) ", useid, lengths[0]);
-		debug_log(" %04d-%02d-%02d %02d:%02d:%02d (%ld)",
-			ts.year, ts.month, ts.day,
-			ts.hour, ts.minute, ts.second, lengths[1]);
-		debug_log(" %s(%ld)\n", content, lengths[2]);
+		message::MessageInfo *info = response.add_message();
+		info->set_chat_content(content);
+		info->set_send_userid(useid);
+		info->set_send_time(sql_mktime(ts));
+		//debug_log("%d(%ld) ", useid, lengths[0]);
+		//debug_log(" %04d-%02d-%02d %02d:%02d:%02d (%ld)",
+		//	ts.year, ts.month, ts.day,
+		//	ts.hour, ts.minute, ts.second, lengths[1]);
+		//debug_log(" %s(%ld)\n", content, lengths[2]);
 	}
 
 	if (!db->free_result()) { return false; }
@@ -216,7 +223,7 @@ bool sq_record_data_insert(sq_record* record, sq_record_entry* entry, uint32_t i
 	}
 
 	char buf[960] = {0};
-	sq_mysql*db = entry->db_acct;
+	sq_mysql*db = entry->db_main;
 
 	snprintf(buf, sizeof(buf), "INSERT INTO `%s` (id,name,pwd) VALUES(%d,'%s','%s')", entry->acct_table, id,name,pwd);
 	if (!db->prepare(buf)){ return false; }
@@ -233,7 +240,7 @@ bool sq_record_data_insert(sq_record* record, sq_record_entry* entry, uint32_t i
 	}
 
 	char buf[960] = { 0 };
-	sq_mysql*db = entry->db[id%MAX_DB_NUMBER];
+	sq_mysql*db = entry->db_main;
 
 	snprintf(buf, sizeof(buf), "INSERT INTO `message` (send_userid,send_time,chat_content) VALUES(%d,now(),'%s')", id, chat_content);
 	if (!db->prepare(buf)){ return false; }

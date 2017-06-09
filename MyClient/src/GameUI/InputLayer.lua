@@ -36,14 +36,6 @@ function InputLayer:onCreate()
     sendBtn:setTitleFontSize(26)
     sendBtn:setTitleText("发送")
     sendBtn:addClickEventListener(function(sender)
-        local request =
-        {
-            last_time = os.time(),
-        }
-
-        local code = pb.encode("message.ChatHistoryRequest",request)
-        sendMsg(106,code)
-        
         local str = inputEdit:getText()
         if str == "" then
             printInfo("Please input message")

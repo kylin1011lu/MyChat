@@ -15,7 +15,7 @@
 
 struct sq_record_entry
 {
-	sq_mysql*									db_acct;
+	sq_mysql*									db_main;
 	sq_mysql* 									db[MAX_DB_NUMBER];
 
 	char										acct_table[MAX_TABLE_NAME];
@@ -25,7 +25,7 @@ struct sq_record_entry
 		{
 			this->db[n] = new sq_mysql;
 		}
-		this->db_acct = new sq_mysql;
+		this->db_main = new sq_mysql;
 	}
 	~sq_record_entry()
 	{
@@ -34,13 +34,13 @@ struct sq_record_entry
 			SQ_SAFE_DELETE(this->db[n]);
 		}
 
-		SQ_SAFE_DELETE(this->db_acct);
+		SQ_SAFE_DELETE(this->db_main);
 	}
 };
 
 struct sq_record
 {
-	sq_mysql_config*							acct_conf;
+	sq_mysql_config*							main_conf;
 	sq_mysql_config*							conf[MAX_DB_NUMBER];
 
 	sq_record()
@@ -64,7 +64,7 @@ sq_record_entry* sq_record_data_init(sq_record* record, const char* table_name);
 
 bool sq_record_data_select(sq_record* record, sq_record_entry* entry, const char* name, char* d, size_t& size);
 bool sq_record_data_select(sq_record* record, sq_record_entry* entry, uint32_t id, char* name,char*pwd, size_t& size);
-bool sq_record_data_select(sq_record* record, sq_record_entry* entry, uint32_t last_time);
+bool sq_record_data_select(sq_record* record, sq_record_entry* entry, uint32_t last_time, message::ChatHistoryResponse & response);
 bool sq_record_data_insert(sq_record* record, sq_record_entry* entry, uint32_t id, const char* name, const char*pwd);
 bool sq_record_data_insert(sq_record* record, sq_record_entry* entry, uint32_t id, const char* chat_content);
 
