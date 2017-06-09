@@ -172,7 +172,7 @@ bool sq_record_data_select(sq_record* record, sq_record_entry* entry, uint32_t l
 
 	sq_mysql*db = entry->db[1%MAX_DB_NUMBER];
 
-	snprintf(buf, sizeof(buf), "SELECT send_userid,send_time,chat_content FROM message WHERE send_time <= \"%04d-%02d-%02d %02d:%02d:%02d\"", _tm.tm_year+1900, _tm.tm_mon+1, _tm.tm_mday, _tm.tm_hour, _tm.tm_min, _tm.tm_sec);
+	snprintf(buf, sizeof(buf), "SELECT send_userid,send_time,chat_content FROM message WHERE send_time <= \"%04d-%02d-%02d %02d:%02d:%02d\" ORDER BY send_time DESC", _tm.tm_year+1900, _tm.tm_mon+1, _tm.tm_mday, _tm.tm_hour, _tm.tm_min, _tm.tm_sec);
 	if (!db->prepare(buf)){ return false; }
 	if (!db->exec()){ return false; }
 
