@@ -9,6 +9,7 @@ Debug.win32
 *.o
 *.sdf
 *.db
+*.zip
 runtime
 simulator
 cocos2d-x
