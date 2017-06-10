@@ -13,6 +13,8 @@ cc.exports.TARGETPLATFORM   = cc.Application:getInstance():getTargetPlatform()
 local function main()
     HotRequire("Manager.init")
 
+    print("========DownloadMain")
+
     parser.register("common.proto","src/pbc")
 
     local startLayer = sLayerManager:createLayer("GameStartLayer")

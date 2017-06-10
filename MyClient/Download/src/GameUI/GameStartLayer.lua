@@ -6,9 +6,8 @@ local GameStartLayer = class("GameStartLayer", require("GameUI.BaseLayer"))
 function GameStartLayer:onCreate()
 	--checkupdate
 	
-	sUpdateManager:StartUpdate()
 	--connect server
-	--sNetworkManager.connectServer()
+	sNetworkManager.connectServer()
 
 	-- local layer = require("GameUI.ContentLayer")
 
