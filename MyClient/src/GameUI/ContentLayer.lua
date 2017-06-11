@@ -88,7 +88,7 @@ end
 function ContentLayer:RefreshTableView()
 
 	table.sort(all_msg,function ( a,b )
-		return a.send_time < b.send_time;
+		return a.send_time > b.send_time;
 	end)
 
 	self.tableView:reloadData()

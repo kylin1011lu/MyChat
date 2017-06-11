@@ -12,10 +12,10 @@ if TARGETPLATFORM == cc.PLATFORM_OS_ANDROID then
 	--阿里云服务器
 	Def.ServerAddress="59.110.213.172"
 else
-	Def.ServerAddress = "127.0.0.1"
+	--Def.ServerAddress = "127.0.0.1"
 
 	--阿里云服务器
-	--Def.ServerAddress="59.110.213.172"
+	Def.ServerAddress="59.110.213.172"
 end
 
 Def.ServerPort=12012

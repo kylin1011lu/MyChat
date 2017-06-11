@@ -45,6 +45,7 @@ end
 
 function UpdateManager:StartUpdate()
 	assetsManager:checkUpdate()
+    printInfo("UpdateManager:StartUpdate")
 end
 
 return UpdateManager
