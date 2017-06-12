@@ -14,3 +14,9 @@ runtime
 simulator
 cocos2d-x
 Download
+
+#Android build
+*.rawproto
+.externalNativeBuild
+.gradle
+.idea
