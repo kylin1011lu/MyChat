@@ -23,4 +23,4 @@ Def.ServerPort=12012
 
 --更新配置
 Def.UpdatePackagePath = "http://www.kylinloveguo.com/mychat/package.zip"
-Def.UpdateVersionPath = "http://www.kylinloveguo.com/mychat/version"
+Def.UpdateVersionPath = "http://www.kylinloveguo.com/mychat/version.txt"

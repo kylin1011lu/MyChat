@@ -3,39 +3,39 @@
 
     <item
         is-multidex="false"
-        jar="D:\Cocos\MyChat\frameworks\cocos2d-x\cocos\platform\android\libcocos2dx\build\intermediates\bundles\default\libs\httpclient-4.4.1.1.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="becf40a1a480be2a5ccb46529dce490f31b516d5">
-        <dex dex="D:\Cocos\MyChat\frameworks\runtime-src\proj.android-studio\app\build\intermediates\pre-dexed\debug\httpclient-4.4.1.1_0c0451a13446bfeaf4c2eff4c0917bd7a34f06b1.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="D:\Cocos\MyChat\frameworks\cocos2d-x\cocos\platform\android\libcocos2dx\build\intermediates\bundles\default\libs\com.android.vending.expansion.zipfile.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="25.0.0"
-        sha1="3785cbb057b995cb42463158b1a798fcc78bb3b0">
-        <dex dex="D:\Cocos\MyChat\frameworks\runtime-src\proj.android-studio\app\build\intermediates\pre-dexed\debug\com.android.vending.expansion.zipfile_86a438ccc68e14397f4eb32a54e7bc0ca4c70a7b.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="D:\Cocos\MyChat\frameworks\cocos2d-x\cocos\platform\android\libcocos2dx\build\intermediates\bundles\default\libs\android-async-http-1.4.9.jar"
+        jar="D:\GitHub\MyChat\MyClient\frameworks\cocos2d-x\cocos\platform\android\libcocos2dx\build\intermediates\bundles\default\libs\android-async-http-1.4.9.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.0"
         sha1="769f000c2940ab43578cd56ffcc81340aad0b182">
-        <dex dex="D:\Cocos\MyChat\frameworks\runtime-src\proj.android-studio\app\build\intermediates\pre-dexed\debug\android-async-http-1.4.9_ce8ecaf6cffcf8fc9ddc1d9427e9cf3ac3fb33c5.jar" />
+        <dex dex="D:\GitHub\MyChat\MyClient\frameworks\runtime-src\proj.android-studio\app\build\intermediates\pre-dexed\debug\android-async-http-1.4.9_cbe7d78a47c3b569808c266de2673339f8bff738.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="D:\Cocos\MyChat\frameworks\cocos2d-x\cocos\platform\android\libcocos2dx\build\intermediates\bundles\default\classes.jar"
+        jar="D:\GitHub\MyChat\MyClient\frameworks\cocos2d-x\cocos\platform\android\libcocos2dx\build\intermediates\bundles\default\libs\httpclient-4.4.1.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="becf40a1a480be2a5ccb46529dce490f31b516d5">
+        <dex dex="D:\GitHub\MyChat\MyClient\frameworks\runtime-src\proj.android-studio\app\build\intermediates\pre-dexed\debug\httpclient-4.4.1.1_ae8cce9748ba03ac3937770c550b7e49d6a221b1.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\GitHub\MyChat\MyClient\frameworks\cocos2d-x\cocos\platform\android\libcocos2dx\build\intermediates\bundles\default\libs\com.android.vending.expansion.zipfile.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.0"
+        sha1="3785cbb057b995cb42463158b1a798fcc78bb3b0">
+        <dex dex="D:\GitHub\MyChat\MyClient\frameworks\runtime-src\proj.android-studio\app\build\intermediates\pre-dexed\debug\com.android.vending.expansion.zipfile_242c9bd8b20bdc21ee2212b61943888e185e2195.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\GitHub\MyChat\MyClient\frameworks\cocos2d-x\cocos\platform\android\libcocos2dx\build\intermediates\bundles\default\classes.jar"
         jumboMode="false"
         optimize="true"
         revision="25.0.0"
         sha1="435589a8fe745a08050f173066b871a7813924fe">
-        <dex dex="D:\Cocos\MyChat\frameworks\runtime-src\proj.android-studio\app\build\intermediates\pre-dexed\debug\classes_3bc5c6a40e9650520513c1d3ce59129e0d86e93b.jar" />
+        <dex dex="D:\GitHub\MyChat\MyClient\frameworks\runtime-src\proj.android-studio\app\build\intermediates\pre-dexed\debug\classes_783d24889a3142f82613e06a41626d973b827516.jar" />
     </item>
 
 </items>
