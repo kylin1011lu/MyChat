@@ -42,6 +42,11 @@
 		2EF8C6031EF6627000B01DE1 /* Image.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2EF8C6021EF6627000B01DE1 /* Image.xcassets */; };
 		2EF8C6061EF6635400B01DE1 /* app-iPhone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2EF8C6041EF6635400B01DE1 /* app-iPhone@2x.png */; };
 		2EF8C6071EF6635400B01DE1 /* app-iPhone@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2EF8C6051EF6635400B01DE1 /* app-iPhone@3x.png */; };
+		2EF8C60D1EF67BAE00B01DE1 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 2EF8C60C1EF67BAE00B01DE1 /* Default.png */; };
+		2EF8C6121EF6819F00B01DE1 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2EF8C60E1EF6819F00B01DE1 /* Default-568h@2x.png */; };
+		2EF8C6131EF6819F00B01DE1 /* Default-667h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2EF8C60F1EF6819F00B01DE1 /* Default-667h@2x.png */; };
+		2EF8C6141EF6819F00B01DE1 /* Default-736h@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2EF8C6101EF6819F00B01DE1 /* Default-736h@3x.png */; };
+		2EF8C6151EF6819F00B01DE1 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2EF8C6111EF6819F00B01DE1 /* Default@2x.png */; };
 		3EEEDB61197107C0006A9FF8 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3EEEDB60197107C0006A9FF8 /* MediaPlayer.framework */; };
 		5023811817EBBCAC00990C9B /* AppController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5023810817EBBCAC00990C9B /* AppController.mm */; };
 		5023812417EBBCAC00990C9B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5023811417EBBCAC00990C9B /* main.m */; };
@@ -248,6 +253,11 @@
 		2EF8C6021EF6627000B01DE1 /* Image.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Image.xcassets; sourceTree = "<group>"; };
 		2EF8C6041EF6635400B01DE1 /* app-iPhone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "app-iPhone@2x.png"; path = "Image.xcassets/app-iPhone@2x.png"; sourceTree = "<group>"; };
 		2EF8C6051EF6635400B01DE1 /* app-iPhone@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "app-iPhone@3x.png"; path = "Image.xcassets/app-iPhone@3x.png"; sourceTree = "<group>"; };
+		2EF8C60C1EF67BAE00B01DE1 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = Image.xcassets/Default.png; sourceTree = "<group>"; };
+		2EF8C60E1EF6819F00B01DE1 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-568h@2x.png"; path = "Image.xcassets/Default-568h@2x.png"; sourceTree = "<group>"; };
+		2EF8C60F1EF6819F00B01DE1 /* Default-667h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-667h@2x.png"; path = "Image.xcassets/Default-667h@2x.png"; sourceTree = "<group>"; };
+		2EF8C6101EF6819F00B01DE1 /* Default-736h@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-736h@3x.png"; path = "Image.xcassets/Default-736h@3x.png"; sourceTree = "<group>"; };
+		2EF8C6111EF6819F00B01DE1 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default@2x.png"; path = "Image.xcassets/Default@2x.png"; sourceTree = "<group>"; };
 		3EEEDB60197107C0006A9FF8 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk/System/Library/Frameworks/MediaPlayer.framework; sourceTree = DEVELOPER_DIR; };
 		5023810717EBBCAC00990C9B /* AppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppController.h; sourceTree = "<group>"; };
 		5023810817EBBCAC00990C9B /* AppController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AppController.mm; sourceTree = "<group>"; };
@@ -458,6 +468,11 @@
 		5023810617EBBCAC00990C9B /* ios */ = {
 			isa = PBXGroup;
 			children = (
+				2EF8C60E1EF6819F00B01DE1 /* Default-568h@2x.png */,
+				2EF8C60F1EF6819F00B01DE1 /* Default-667h@2x.png */,
+				2EF8C6101EF6819F00B01DE1 /* Default-736h@3x.png */,
+				2EF8C6111EF6819F00B01DE1 /* Default@2x.png */,
+				2EF8C60C1EF67BAE00B01DE1 /* Default.png */,
 				5023810717EBBCAC00990C9B /* AppController.h */,
 				5023810817EBBCAC00990C9B /* AppController.mm */,
 				5023811317EBBCAC00990C9B /* Info.plist */,
@@ -759,13 +774,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2EF8C6151EF6819F00B01DE1 /* Default@2x.png in Resources */,
 				2EF8C6031EF6627000B01DE1 /* Image.xcassets in Resources */,
 				2EF8C6061EF6635400B01DE1 /* app-iPhone@2x.png in Resources */,
+				2EF8C6121EF6819F00B01DE1 /* Default-568h@2x.png in Resources */,
+				2EF8C6141EF6819F00B01DE1 /* Default-736h@3x.png in Resources */,
 				2EF8C6011EF661E400B01DE1 /* Images.xcassets in Resources */,
 				C03781B918BF655400FE4F13 /* res in Resources */,
 				2EF8C6071EF6635400B01DE1 /* app-iPhone@3x.png in Resources */,
 				C03781BB18BF655400FE4F13 /* src in Resources */,
 				C05D1C121923449100B808A4 /* config.json in Resources */,
+				2EF8C60D1EF67BAE00B01DE1 /* Default.png in Resources */,
+				2EF8C6131EF6819F00B01DE1 /* Default-667h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
