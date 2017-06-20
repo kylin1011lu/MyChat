@@ -83,23 +83,13 @@ uint32_t generateUUID()
 
 unsigned long sql_mktime(const MYSQL_TIME tm)
 {
-	unsigned int year = tm.year;
-	unsigned int mon = tm.month;
-	unsigned int day = tm.day;
-	unsigned int hour = tm.hour;
-	unsigned int min = tm.minute;
-	unsigned int sec = tm.second;
+	struct tm _tm;
+	_tm.tm_hour		= tm.hour;
+	_tm.tm_min		= tm.minute;
+	_tm.tm_sec = tm.second;
+	_tm.tm_year = tm.year - 1900;
+	_tm.tm_mon = tm.month - 1;
+	_tm.tm_mday = tm.day;
 
-	/* 1..12 -> 11,12,1..10 */
-	if (0 >= (int)(mon -= 2)) {
-		mon += 12;  /* Puts Feb last since it has leap day */
-		year -= 1;
-	}
-
-	return ((((unsigned long)
-		(year / 4 - year / 100 + year / 400 + 367 * mon / 12 + day) +
-		year * 365 - 719499
-		) * 24 + hour /* now have hours */
-		) * 60 + min /* now have minutes */
-		) * 60 + sec; /* finally seconds */
+	return mktime(&_tm);
 }

@@ -10,6 +10,7 @@ Debug.win32
 *.sdf
 *.db
 *.zip
+*.suo
 runtime
 simulator
 cocos2d-x

@@ -66,6 +66,6 @@ bool sq_record_data_select(sq_record* record, sq_record_entry* entry, const char
 bool sq_record_data_select(sq_record* record, sq_record_entry* entry, uint32_t id, char* name,char*pwd, size_t& size);
 bool sq_record_data_select(sq_record* record, sq_record_entry* entry, uint32_t last_time, message::ChatHistoryResponse & response);
 bool sq_record_data_insert(sq_record* record, sq_record_entry* entry, uint32_t id, const char* name, const char*pwd);
-bool sq_record_data_insert(sq_record* record, sq_record_entry* entry, uint32_t id, const char* chat_content);
+bool sq_record_data_insert(sq_record* record, sq_record_entry* entry, uint32_t id, const char* chat_content,uint32_t insert_time);
 
 #endif

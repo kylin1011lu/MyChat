@@ -173,7 +173,8 @@ void sq_handler_user::do_chat_request(const MY_MSG_HEAD* msghead)
 	message::ChatRequest *request = (message::ChatRequest *)msghead->msg;
 	debug_log("do_chat_request->chat_content:%s\n", request->chat_content().c_str());
 
-	if (!sq_record_data_insert(m_record,m_record_entry,msghead->userid,request->chat_content().c_str()))
+	uint32_t insert_time = time(0);
+	if (!sq_record_data_insert(m_record, m_record_entry, msghead->userid, request->chat_content().c_str(), insert_time))
 	{
 		error_log("do_chat_request->sq_record_data_insert error");
 	}
@@ -182,7 +183,7 @@ void sq_handler_user::do_chat_request(const MY_MSG_HEAD* msghead)
 	message::MessageInfo *info = response.add_message();
 	info->set_chat_content(request->chat_content());
 	info->set_send_userid(msghead->userid);
-	info->set_send_time(time(0));
+	info->set_send_time(insert_time);
 
 	MY_MSG_HEAD resmsg;
 	resmsg.msgid = message::ChatResponse::ID;

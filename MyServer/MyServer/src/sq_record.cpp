@@ -170,8 +170,6 @@ bool sq_record_data_select(sq_record* record, sq_record_entry* entry, uint32_t l
 	time_t t = last_time;
 	localtime_r(&t, &_tm);
 
-	mktime(&_tm);
-
 	sq_mysql*db = entry->db_main;
 
 	snprintf(buf, sizeof(buf), "SELECT send_userid,send_time,chat_content FROM message WHERE send_time <= \"%04d-%02d-%02d %02d:%02d:%02d\" ORDER BY send_time DESC", _tm.tm_year+1900, _tm.tm_mon+1, _tm.tm_mday, _tm.tm_hour, _tm.tm_min, _tm.tm_sec);
@@ -232,7 +230,7 @@ bool sq_record_data_insert(sq_record* record, sq_record_entry* entry, uint32_t i
 	return true;
 }
 
-bool sq_record_data_insert(sq_record* record, sq_record_entry* entry, uint32_t id, const char* chat_content)
+bool sq_record_data_insert(sq_record* record, sq_record_entry* entry, uint32_t id, const char* chat_content, uint32_t insert_time)
 {
 	if (!entry)
 	{
@@ -242,7 +240,11 @@ bool sq_record_data_insert(sq_record* record, sq_record_entry* entry, uint32_t i
 	char buf[960] = { 0 };
 	sq_mysql*db = entry->db_main;
 
-	snprintf(buf, sizeof(buf), "INSERT INTO `message` (send_userid,send_time,chat_content) VALUES(%d,now(),'%s')", id, chat_content);
+	struct tm _tm;
+	time_t t = insert_time;
+	localtime_r(&t, &_tm);
+
+	snprintf(buf, sizeof(buf), "INSERT INTO `message` (send_userid,send_time,chat_content) VALUES(%d,\"%04d-%02d-%02d %02d:%02d:%02d\",'%s')", id, _tm.tm_year + 1900, _tm.tm_mon + 1, _tm.tm_mday, _tm.tm_hour, _tm.tm_min, _tm.tm_sec, chat_content);
 	if (!db->prepare(buf)){ return false; }
 	if (!db->exec()){ return false; }
 
