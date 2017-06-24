@@ -22,6 +22,7 @@ void protobuf_ShutdownFile_common_2eproto() {
   delete UserLoginResponse::default_instance_;
   delete ChatRequest::default_instance_;
   delete MessageInfo::default_instance_;
+  delete MsgCacheInfo::default_instance_;
   delete ChatResponse::default_instance_;
   delete ChatHistoryRequest::default_instance_;
   delete ChatHistoryResponse::default_instance_;
@@ -46,6 +47,7 @@ void protobuf_AddDesc_common_2eproto() {
   UserLoginResponse::default_instance_ = new UserLoginResponse();
   ChatRequest::default_instance_ = new ChatRequest();
   MessageInfo::default_instance_ = new MessageInfo();
+  MsgCacheInfo::default_instance_ = new MsgCacheInfo();
   ChatResponse::default_instance_ = new ChatResponse();
   ChatHistoryRequest::default_instance_ = new ChatHistoryRequest();
   ChatHistoryResponse::default_instance_ = new ChatHistoryResponse();
@@ -56,6 +58,7 @@ void protobuf_AddDesc_common_2eproto() {
   UserLoginResponse::default_instance_->InitAsDefaultInstance();
   ChatRequest::default_instance_->InitAsDefaultInstance();
   MessageInfo::default_instance_->InitAsDefaultInstance();
+  MsgCacheInfo::default_instance_->InitAsDefaultInstance();
   ChatResponse::default_instance_->InitAsDefaultInstance();
   ChatHistoryRequest::default_instance_->InitAsDefaultInstance();
   ChatHistoryResponse::default_instance_->InitAsDefaultInstance();
@@ -1656,6 +1659,169 @@ void MessageInfo::Swap(MessageInfo* other) {
 
 ::std::string MessageInfo::GetTypeName() const {
   return "message.MessageInfo";
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int MsgCacheInfo::kMessageFieldNumber;
+#endif  // !_MSC_VER
+
+MsgCacheInfo::MsgCacheInfo()
+  : ::google::protobuf::MessageLite() {
+  SharedCtor();
+}
+
+void MsgCacheInfo::InitAsDefaultInstance() {
+}
+
+MsgCacheInfo::MsgCacheInfo(const MsgCacheInfo& from)
+  : ::google::protobuf::MessageLite() {
+  SharedCtor();
+  MergeFrom(from);
+}
+
+void MsgCacheInfo::SharedCtor() {
+  _cached_size_ = 0;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+MsgCacheInfo::~MsgCacheInfo() {
+  SharedDtor();
+}
+
+void MsgCacheInfo::SharedDtor() {
+  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  if (this != &default_instance()) {
+  #else
+  if (this != default_instance_) {
+  #endif
+  }
+}
+
+void MsgCacheInfo::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const MsgCacheInfo& MsgCacheInfo::default_instance() {
+#ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  protobuf_AddDesc_common_2eproto();
+#else
+  if (default_instance_ == NULL) protobuf_AddDesc_common_2eproto();
+#endif
+  return *default_instance_;
+}
+
+MsgCacheInfo* MsgCacheInfo::default_instance_ = NULL;
+
+MsgCacheInfo* MsgCacheInfo::New() const {
+  return new MsgCacheInfo;
+}
+
+void MsgCacheInfo::Clear() {
+  message_.Clear();
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+bool MsgCacheInfo::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+  ::google::protobuf::uint32 tag;
+  while ((tag = input->ReadTag()) != 0) {
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // repeated .message.MessageInfo message = 2;
+      case 2: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+         parse_message:
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+                input, add_message()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(18)) goto parse_message;
+        if (input->ExpectAtEnd()) return true;
+        break;
+      }
+
+      default: {
+      handle_uninterpreted:
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          return true;
+        }
+        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
+        break;
+      }
+    }
+  }
+  return true;
+#undef DO_
+}
+
+void MsgCacheInfo::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // repeated .message.MessageInfo message = 2;
+  for (int i = 0; i < this->message_size(); i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessage(
+      2, this->message(i), output);
+  }
+
+}
+
+int MsgCacheInfo::ByteSize() const {
+  int total_size = 0;
+
+  // repeated .message.MessageInfo message = 2;
+  total_size += 1 * this->message_size();
+  for (int i = 0; i < this->message_size(); i++) {
+    total_size +=
+      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+        this->message(i));
+  }
+
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void MsgCacheInfo::CheckTypeAndMergeFrom(
+    const ::google::protobuf::MessageLite& from) {
+  MergeFrom(*::google::protobuf::down_cast<const MsgCacheInfo*>(&from));
+}
+
+void MsgCacheInfo::MergeFrom(const MsgCacheInfo& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  message_.MergeFrom(from.message_);
+}
+
+void MsgCacheInfo::CopyFrom(const MsgCacheInfo& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool MsgCacheInfo::IsInitialized() const {
+
+  for (int i = 0; i < message_size(); i++) {
+    if (!this->message(i).IsInitialized()) return false;
+  }
+  return true;
+}
+
+void MsgCacheInfo::Swap(MsgCacheInfo* other) {
+  if (other != this) {
+    message_.Swap(&other->message_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::std::string MsgCacheInfo::GetTypeName() const {
+  return "message.MsgCacheInfo";
 }
 
 

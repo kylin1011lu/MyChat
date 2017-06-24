@@ -1,8 +1,8 @@
 protoc.exe --cpp_out=. common.proto
 
-set client_path=D:\Cocos\MyChat\frameworks\runtime-src\Classes\Protobuf
-set server_path=D:\GitHub\MyChat\MyServer\MyServer\protobuf
-set src_path=D:\Cocos\MyChat\src\pbc
+set client_path=..\MyClient\frameworks\runtime-src\Classes\Protobuf
+set server_path=..\MyServer\MyServer\protobuf
+set src_path=..\MyClient\src\pbc
 
 
 copy common.pb.h %client_path%\common.pb.h

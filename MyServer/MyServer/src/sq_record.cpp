@@ -194,13 +194,18 @@ bool sq_record_data_select(sq_record* record, sq_record_entry* entry, uint32_t l
 	if (!db->bind_result(result)){ return false; }
 	
 	struct tm chat_time;
-
+	int count = 0;
 	while (!db->continue_fetch())
 	{
 		message::MessageInfo *info = response.add_message();
 		info->set_chat_content(content);
 		info->set_send_userid(useid);
 		info->set_send_time(sql_mktime(ts));
+		count++;
+		if (count >15)
+		{
+			break;
+		}
 		//debug_log("%d(%ld) ", useid, lengths[0]);
 		//debug_log(" %04d-%02d-%02d %02d:%02d:%02d (%ld)",
 		//	ts.year, ts.month, ts.day,

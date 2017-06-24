@@ -39,6 +39,7 @@ class UserLoginRequest;
 class UserLoginResponse;
 class ChatRequest;
 class MessageInfo;
+class MsgCacheInfo;
 class ChatResponse;
 class ChatHistoryRequest;
 class ChatHistoryResponse;
@@ -900,6 +901,92 @@ class MessageInfo : public ::google::protobuf::MessageLite {
 
   void InitAsDefaultInstance();
   static MessageInfo* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class MsgCacheInfo : public ::google::protobuf::MessageLite {
+ public:
+  MsgCacheInfo();
+  virtual ~MsgCacheInfo();
+
+  MsgCacheInfo(const MsgCacheInfo& from);
+
+  inline MsgCacheInfo& operator=(const MsgCacheInfo& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const MsgCacheInfo& default_instance();
+
+  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  // Returns the internal default instance pointer. This function can
+  // return NULL thus should not be used by the user. This is intended
+  // for Protobuf internal code. Please use default_instance() declared
+  // above instead.
+  static inline const MsgCacheInfo* internal_default_instance() {
+    return default_instance_;
+  }
+  #endif
+
+  void Swap(MsgCacheInfo* other);
+
+  // implements Message ----------------------------------------------
+
+  MsgCacheInfo* New() const;
+  void CheckTypeAndMergeFrom(const ::google::protobuf::MessageLite& from);
+  void CopyFrom(const MsgCacheInfo& from);
+  void MergeFrom(const MsgCacheInfo& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::std::string GetTypeName() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // repeated .message.MessageInfo message = 2;
+  inline int message_size() const;
+  inline void clear_message();
+  static const int kMessageFieldNumber = 2;
+  inline const ::message::MessageInfo& message(int index) const;
+  inline ::message::MessageInfo* mutable_message(int index);
+  inline ::message::MessageInfo* add_message();
+  inline const ::google::protobuf::RepeatedPtrField< ::message::MessageInfo >&
+      message() const;
+  inline ::google::protobuf::RepeatedPtrField< ::message::MessageInfo >*
+      mutable_message();
+
+  // @@protoc_insertion_point(class_scope:message.MsgCacheInfo)
+ private:
+
+  ::google::protobuf::RepeatedPtrField< ::message::MessageInfo > message_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+
+  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  friend void  protobuf_AddDesc_common_2eproto_impl();
+  #else
+  friend void  protobuf_AddDesc_common_2eproto();
+  #endif
+  friend void protobuf_AssignDesc_common_2eproto();
+  friend void protobuf_ShutdownFile_common_2eproto();
+
+  void InitAsDefaultInstance();
+  static MsgCacheInfo* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -1867,6 +1954,35 @@ inline ::google::protobuf::uint32 MessageInfo::send_time() const {
 inline void MessageInfo::set_send_time(::google::protobuf::uint32 value) {
   set_has_send_time();
   send_time_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// MsgCacheInfo
+
+// repeated .message.MessageInfo message = 2;
+inline int MsgCacheInfo::message_size() const {
+  return message_.size();
+}
+inline void MsgCacheInfo::clear_message() {
+  message_.Clear();
+}
+inline const ::message::MessageInfo& MsgCacheInfo::message(int index) const {
+  return message_.Get(index);
+}
+inline ::message::MessageInfo* MsgCacheInfo::mutable_message(int index) {
+  return message_.Mutable(index);
+}
+inline ::message::MessageInfo* MsgCacheInfo::add_message() {
+  return message_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::message::MessageInfo >&
+MsgCacheInfo::message() const {
+  return message_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::message::MessageInfo >*
+MsgCacheInfo::mutable_message() {
+  return &message_;
 }
 
 // -------------------------------------------------------------------

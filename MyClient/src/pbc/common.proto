@@ -83,6 +83,12 @@ message MessageInfo
 	required uint32 send_time=5;   //发送时间
 }
 
+//本地缓存信息
+message MsgCacheInfo
+{
+	repeated MessageInfo message = 2;
+}
+
 //聊天返回
 message ChatResponse
 {

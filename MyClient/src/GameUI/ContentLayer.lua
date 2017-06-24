@@ -226,6 +226,7 @@ end
 function ContentLayer:doChatResponse(data)
 
  	self:ParseMessage(data)
+ 	sMsgManager:writeMsgToCache(data)
  	self:RefreshTableView()
 end
 
