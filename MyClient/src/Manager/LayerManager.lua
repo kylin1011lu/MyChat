@@ -23,6 +23,7 @@ function LayerManager:createLayer(name,...)
 	local layerInfo = self._allLayers[name]
 	if nil == layerInfo then
 		printError("LayerManager:createLayer not find layer:"..name)
+        return nil
 	end 
 
     local layer = HotRequire(layerInfo.Path).create()
@@ -40,6 +41,7 @@ function LayerManager:getLayerByName(name)
     local layerInfo = self._allLayers[name]
     if nil == layerInfo then
         printError("LayerManager:getLayerByName not find layer:"..name)
+        return nil
     end 
     local scene=cc.Director:getInstance():getRunningScene()
     return scene:getChildByTag(layerInfo.Tag)

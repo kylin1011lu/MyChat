@@ -5,11 +5,6 @@ require "config"
 require "Framework.HotRequire"
 require "cocos.init"
 
-cc.exports.DIRECTOR         = cc.Director:getInstance()
-cc.exports.WINSIZE          = cc.Director:getInstance():getWinSize()
-cc.exports.USERDEFAULT      = cc.UserDefault:getInstance()
-cc.exports.TARGETPLATFORM   = cc.Application:getInstance():getTargetPlatform()
-
 local function main()
     HotRequire("Manager.init")
 

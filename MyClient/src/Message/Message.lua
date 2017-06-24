@@ -57,7 +57,7 @@ msg_handler_table =
         --聊天
         [105]      =        function(self,data) if self.doChatResponse then  self:doChatResponse(data) end end,
         --聊天历史
-        [107]      =        function(self,data) if self.doChatHistoryResponse then  self:doChatHistoryResponse(data) end end,
+        --[107]      =        function(self,data) if self.doChatHistoryResponse then  self:doChatHistoryResponse(data) end end,
 }
 
 proto_msg_table =
@@ -65,7 +65,7 @@ proto_msg_table =
     [101] = "message.AccountRegisterResponse",
     [103] = "message.UserLoginResponse",
     [105] = "message.ChatResponse",
-    [107] = "message.ChatHistoryResponse",
+    --[107] = "message.ChatHistoryResponse",
 }
 
 function cc.exports.notifyUIUpdate(funcName,data)
@@ -73,7 +73,11 @@ function cc.exports.notifyUIUpdate(funcName,data)
     local eventDispatcher=DIRECTOR:getRunningScene():getEventDispatcher()
     local event = cc.EventCustom:new("netMessage")
     event.data=data
-    event.func=function(self,data) if self[funcName] then self[funcName](self,data) end end 
+    event.func=function(self,data)   
+        if self[funcName] then 
+            self[funcName](self,data) 
+        end 
+    end 
     eventDispatcher:dispatchEvent(event)
 end
 
@@ -82,5 +86,6 @@ function cc.exports.onConnected()
 end
 
 function cc.exports.sendMsg(cmd,code)
+    printInfo("sendmsg[cmd]:"..cmd)
     cci.sendmsg(cmd,code,string.len(code))
 end

@@ -75,6 +75,15 @@ message ChatRequest
     required bytes chat_content=3;
 }
 
+//聊天历史
+message ChatHistoryRequest
+{
+	// 消息ID
+	enum MSGID {ID=106;}
+	
+	optional uint32 last_time =2;
+}
+
 //一条聊天日志
 message MessageInfo
 {
@@ -89,29 +98,11 @@ message MsgCacheInfo
 	repeated MessageInfo message = 2;
 }
 
-//聊天返回
+//聊天返回/聊天历史
 message ChatResponse
 {
 	// 消息ID
 	enum MSGID {ID=105;}
-	
-	repeated MessageInfo message = 2;
-}
-
-//聊天历史
-message ChatHistoryRequest
-{
-	// 消息ID
-	enum MSGID {ID=106;}
-	
-	optional uint32 last_time =2;
-}
-
-//聊天历史
-message ChatHistoryResponse
-{
-	// 消息ID
-	enum MSGID {ID=107;}
 	
 	repeated MessageInfo message = 2;
 }

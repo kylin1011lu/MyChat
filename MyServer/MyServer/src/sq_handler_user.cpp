@@ -206,7 +206,7 @@ void sq_handler_user::do_chat_history_request(const MY_MSG_HEAD* msghead)
 	message::ChatHistoryRequest *request = (message::ChatHistoryRequest *)msghead->msg;
 	debug_log("do_chat_history_request->last_time:%d\n", request->last_time());
 
-	message::ChatHistoryResponse response;
+	message::ChatResponse response;
 
 	if (!sq_record_data_select(m_record,m_record_entry,request->last_time(),response))
 	{

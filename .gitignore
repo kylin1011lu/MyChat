@@ -11,11 +11,13 @@ Debug.win32
 *.db
 *.zip
 *.suo
+*.v12.suo
 runtime
 simulator
 cocos2d-x
 Download
 UserDefault.xml
+msg_cache_file.txt
 
 #Android build
 *.rawproto

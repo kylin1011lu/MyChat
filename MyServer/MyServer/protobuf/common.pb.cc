@@ -21,11 +21,10 @@ void protobuf_ShutdownFile_common_2eproto() {
   delete UserLoginRequest::default_instance_;
   delete UserLoginResponse::default_instance_;
   delete ChatRequest::default_instance_;
+  delete ChatHistoryRequest::default_instance_;
   delete MessageInfo::default_instance_;
   delete MsgCacheInfo::default_instance_;
   delete ChatResponse::default_instance_;
-  delete ChatHistoryRequest::default_instance_;
-  delete ChatHistoryResponse::default_instance_;
 }
 
 #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
@@ -46,22 +45,20 @@ void protobuf_AddDesc_common_2eproto() {
   UserLoginRequest::default_instance_ = new UserLoginRequest();
   UserLoginResponse::default_instance_ = new UserLoginResponse();
   ChatRequest::default_instance_ = new ChatRequest();
+  ChatHistoryRequest::default_instance_ = new ChatHistoryRequest();
   MessageInfo::default_instance_ = new MessageInfo();
   MsgCacheInfo::default_instance_ = new MsgCacheInfo();
   ChatResponse::default_instance_ = new ChatResponse();
-  ChatHistoryRequest::default_instance_ = new ChatHistoryRequest();
-  ChatHistoryResponse::default_instance_ = new ChatHistoryResponse();
   User::default_instance_->InitAsDefaultInstance();
   AccountRegisterRequest::default_instance_->InitAsDefaultInstance();
   AccountRegisterResponse::default_instance_->InitAsDefaultInstance();
   UserLoginRequest::default_instance_->InitAsDefaultInstance();
   UserLoginResponse::default_instance_->InitAsDefaultInstance();
   ChatRequest::default_instance_->InitAsDefaultInstance();
+  ChatHistoryRequest::default_instance_->InitAsDefaultInstance();
   MessageInfo::default_instance_->InitAsDefaultInstance();
   MsgCacheInfo::default_instance_->InitAsDefaultInstance();
   ChatResponse::default_instance_->InitAsDefaultInstance();
-  ChatHistoryRequest::default_instance_->InitAsDefaultInstance();
-  ChatHistoryResponse::default_instance_->InitAsDefaultInstance();
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_common_2eproto);
 }
 
@@ -1420,6 +1417,188 @@ void ChatRequest::Swap(ChatRequest* other) {
 
 // ===================================================================
 
+bool ChatHistoryRequest_MSGID_IsValid(int value) {
+  switch(value) {
+    case 106:
+      return true;
+    default:
+      return false;
+  }
+}
+
+#ifndef _MSC_VER
+const ChatHistoryRequest_MSGID ChatHistoryRequest::ID;
+const ChatHistoryRequest_MSGID ChatHistoryRequest::MSGID_MIN;
+const ChatHistoryRequest_MSGID ChatHistoryRequest::MSGID_MAX;
+const int ChatHistoryRequest::MSGID_ARRAYSIZE;
+#endif  // _MSC_VER
+#ifndef _MSC_VER
+const int ChatHistoryRequest::kLastTimeFieldNumber;
+#endif  // !_MSC_VER
+
+ChatHistoryRequest::ChatHistoryRequest()
+  : ::google::protobuf::MessageLite() {
+  SharedCtor();
+}
+
+void ChatHistoryRequest::InitAsDefaultInstance() {
+}
+
+ChatHistoryRequest::ChatHistoryRequest(const ChatHistoryRequest& from)
+  : ::google::protobuf::MessageLite() {
+  SharedCtor();
+  MergeFrom(from);
+}
+
+void ChatHistoryRequest::SharedCtor() {
+  _cached_size_ = 0;
+  last_time_ = 0u;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+ChatHistoryRequest::~ChatHistoryRequest() {
+  SharedDtor();
+}
+
+void ChatHistoryRequest::SharedDtor() {
+  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  if (this != &default_instance()) {
+  #else
+  if (this != default_instance_) {
+  #endif
+  }
+}
+
+void ChatHistoryRequest::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ChatHistoryRequest& ChatHistoryRequest::default_instance() {
+#ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  protobuf_AddDesc_common_2eproto();
+#else
+  if (default_instance_ == NULL) protobuf_AddDesc_common_2eproto();
+#endif
+  return *default_instance_;
+}
+
+ChatHistoryRequest* ChatHistoryRequest::default_instance_ = NULL;
+
+ChatHistoryRequest* ChatHistoryRequest::New() const {
+  return new ChatHistoryRequest;
+}
+
+void ChatHistoryRequest::Clear() {
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    last_time_ = 0u;
+  }
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+bool ChatHistoryRequest::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+  ::google::protobuf::uint32 tag;
+  while ((tag = input->ReadTag()) != 0) {
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // optional uint32 last_time = 2;
+      case 2: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, &last_time_)));
+          set_has_last_time();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectAtEnd()) return true;
+        break;
+      }
+
+      default: {
+      handle_uninterpreted:
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          return true;
+        }
+        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
+        break;
+      }
+    }
+  }
+  return true;
+#undef DO_
+}
+
+void ChatHistoryRequest::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // optional uint32 last_time = 2;
+  if (has_last_time()) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt32(2, this->last_time(), output);
+  }
+
+}
+
+int ChatHistoryRequest::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // optional uint32 last_time = 2;
+    if (has_last_time()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::UInt32Size(
+          this->last_time());
+    }
+
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void ChatHistoryRequest::CheckTypeAndMergeFrom(
+    const ::google::protobuf::MessageLite& from) {
+  MergeFrom(*::google::protobuf::down_cast<const ChatHistoryRequest*>(&from));
+}
+
+void ChatHistoryRequest::MergeFrom(const ChatHistoryRequest& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_last_time()) {
+      set_last_time(from.last_time());
+    }
+  }
+}
+
+void ChatHistoryRequest::CopyFrom(const ChatHistoryRequest& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool ChatHistoryRequest::IsInitialized() const {
+
+  return true;
+}
+
+void ChatHistoryRequest::Swap(ChatHistoryRequest* other) {
+  if (other != this) {
+    std::swap(last_time_, other->last_time_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::std::string ChatHistoryRequest::GetTypeName() const {
+  return "message.ChatHistoryRequest";
+}
+
+
+// ===================================================================
+
 #ifndef _MSC_VER
 const int MessageInfo::kChatContentFieldNumber;
 const int MessageInfo::kSendUseridFieldNumber;
@@ -2000,366 +2179,6 @@ void ChatResponse::Swap(ChatResponse* other) {
 
 ::std::string ChatResponse::GetTypeName() const {
   return "message.ChatResponse";
-}
-
-
-// ===================================================================
-
-bool ChatHistoryRequest_MSGID_IsValid(int value) {
-  switch(value) {
-    case 106:
-      return true;
-    default:
-      return false;
-  }
-}
-
-#ifndef _MSC_VER
-const ChatHistoryRequest_MSGID ChatHistoryRequest::ID;
-const ChatHistoryRequest_MSGID ChatHistoryRequest::MSGID_MIN;
-const ChatHistoryRequest_MSGID ChatHistoryRequest::MSGID_MAX;
-const int ChatHistoryRequest::MSGID_ARRAYSIZE;
-#endif  // _MSC_VER
-#ifndef _MSC_VER
-const int ChatHistoryRequest::kLastTimeFieldNumber;
-#endif  // !_MSC_VER
-
-ChatHistoryRequest::ChatHistoryRequest()
-  : ::google::protobuf::MessageLite() {
-  SharedCtor();
-}
-
-void ChatHistoryRequest::InitAsDefaultInstance() {
-}
-
-ChatHistoryRequest::ChatHistoryRequest(const ChatHistoryRequest& from)
-  : ::google::protobuf::MessageLite() {
-  SharedCtor();
-  MergeFrom(from);
-}
-
-void ChatHistoryRequest::SharedCtor() {
-  _cached_size_ = 0;
-  last_time_ = 0u;
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-}
-
-ChatHistoryRequest::~ChatHistoryRequest() {
-  SharedDtor();
-}
-
-void ChatHistoryRequest::SharedDtor() {
-  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
-  if (this != &default_instance()) {
-  #else
-  if (this != default_instance_) {
-  #endif
-  }
-}
-
-void ChatHistoryRequest::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ChatHistoryRequest& ChatHistoryRequest::default_instance() {
-#ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
-  protobuf_AddDesc_common_2eproto();
-#else
-  if (default_instance_ == NULL) protobuf_AddDesc_common_2eproto();
-#endif
-  return *default_instance_;
-}
-
-ChatHistoryRequest* ChatHistoryRequest::default_instance_ = NULL;
-
-ChatHistoryRequest* ChatHistoryRequest::New() const {
-  return new ChatHistoryRequest;
-}
-
-void ChatHistoryRequest::Clear() {
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    last_time_ = 0u;
-  }
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-}
-
-bool ChatHistoryRequest::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
-  ::google::protobuf::uint32 tag;
-  while ((tag = input->ReadTag()) != 0) {
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // optional uint32 last_time = 2;
-      case 2: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
-                 input, &last_time_)));
-          set_has_last_time();
-        } else {
-          goto handle_uninterpreted;
-        }
-        if (input->ExpectAtEnd()) return true;
-        break;
-      }
-
-      default: {
-      handle_uninterpreted:
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          return true;
-        }
-        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
-        break;
-      }
-    }
-  }
-  return true;
-#undef DO_
-}
-
-void ChatHistoryRequest::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // optional uint32 last_time = 2;
-  if (has_last_time()) {
-    ::google::protobuf::internal::WireFormatLite::WriteUInt32(2, this->last_time(), output);
-  }
-
-}
-
-int ChatHistoryRequest::ByteSize() const {
-  int total_size = 0;
-
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // optional uint32 last_time = 2;
-    if (has_last_time()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::UInt32Size(
-          this->last_time());
-    }
-
-  }
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = total_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
-}
-
-void ChatHistoryRequest::CheckTypeAndMergeFrom(
-    const ::google::protobuf::MessageLite& from) {
-  MergeFrom(*::google::protobuf::down_cast<const ChatHistoryRequest*>(&from));
-}
-
-void ChatHistoryRequest::MergeFrom(const ChatHistoryRequest& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from.has_last_time()) {
-      set_last_time(from.last_time());
-    }
-  }
-}
-
-void ChatHistoryRequest::CopyFrom(const ChatHistoryRequest& from) {
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool ChatHistoryRequest::IsInitialized() const {
-
-  return true;
-}
-
-void ChatHistoryRequest::Swap(ChatHistoryRequest* other) {
-  if (other != this) {
-    std::swap(last_time_, other->last_time_);
-    std::swap(_has_bits_[0], other->_has_bits_[0]);
-    std::swap(_cached_size_, other->_cached_size_);
-  }
-}
-
-::std::string ChatHistoryRequest::GetTypeName() const {
-  return "message.ChatHistoryRequest";
-}
-
-
-// ===================================================================
-
-bool ChatHistoryResponse_MSGID_IsValid(int value) {
-  switch(value) {
-    case 107:
-      return true;
-    default:
-      return false;
-  }
-}
-
-#ifndef _MSC_VER
-const ChatHistoryResponse_MSGID ChatHistoryResponse::ID;
-const ChatHistoryResponse_MSGID ChatHistoryResponse::MSGID_MIN;
-const ChatHistoryResponse_MSGID ChatHistoryResponse::MSGID_MAX;
-const int ChatHistoryResponse::MSGID_ARRAYSIZE;
-#endif  // _MSC_VER
-#ifndef _MSC_VER
-const int ChatHistoryResponse::kMessageFieldNumber;
-#endif  // !_MSC_VER
-
-ChatHistoryResponse::ChatHistoryResponse()
-  : ::google::protobuf::MessageLite() {
-  SharedCtor();
-}
-
-void ChatHistoryResponse::InitAsDefaultInstance() {
-}
-
-ChatHistoryResponse::ChatHistoryResponse(const ChatHistoryResponse& from)
-  : ::google::protobuf::MessageLite() {
-  SharedCtor();
-  MergeFrom(from);
-}
-
-void ChatHistoryResponse::SharedCtor() {
-  _cached_size_ = 0;
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-}
-
-ChatHistoryResponse::~ChatHistoryResponse() {
-  SharedDtor();
-}
-
-void ChatHistoryResponse::SharedDtor() {
-  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
-  if (this != &default_instance()) {
-  #else
-  if (this != default_instance_) {
-  #endif
-  }
-}
-
-void ChatHistoryResponse::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ChatHistoryResponse& ChatHistoryResponse::default_instance() {
-#ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
-  protobuf_AddDesc_common_2eproto();
-#else
-  if (default_instance_ == NULL) protobuf_AddDesc_common_2eproto();
-#endif
-  return *default_instance_;
-}
-
-ChatHistoryResponse* ChatHistoryResponse::default_instance_ = NULL;
-
-ChatHistoryResponse* ChatHistoryResponse::New() const {
-  return new ChatHistoryResponse;
-}
-
-void ChatHistoryResponse::Clear() {
-  message_.Clear();
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-}
-
-bool ChatHistoryResponse::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
-  ::google::protobuf::uint32 tag;
-  while ((tag = input->ReadTag()) != 0) {
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // repeated .message.MessageInfo message = 2;
-      case 2: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
-         parse_message:
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
-                input, add_message()));
-        } else {
-          goto handle_uninterpreted;
-        }
-        if (input->ExpectTag(18)) goto parse_message;
-        if (input->ExpectAtEnd()) return true;
-        break;
-      }
-
-      default: {
-      handle_uninterpreted:
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          return true;
-        }
-        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
-        break;
-      }
-    }
-  }
-  return true;
-#undef DO_
-}
-
-void ChatHistoryResponse::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // repeated .message.MessageInfo message = 2;
-  for (int i = 0; i < this->message_size(); i++) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessage(
-      2, this->message(i), output);
-  }
-
-}
-
-int ChatHistoryResponse::ByteSize() const {
-  int total_size = 0;
-
-  // repeated .message.MessageInfo message = 2;
-  total_size += 1 * this->message_size();
-  for (int i = 0; i < this->message_size(); i++) {
-    total_size +=
-      ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-        this->message(i));
-  }
-
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = total_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
-}
-
-void ChatHistoryResponse::CheckTypeAndMergeFrom(
-    const ::google::protobuf::MessageLite& from) {
-  MergeFrom(*::google::protobuf::down_cast<const ChatHistoryResponse*>(&from));
-}
-
-void ChatHistoryResponse::MergeFrom(const ChatHistoryResponse& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  message_.MergeFrom(from.message_);
-}
-
-void ChatHistoryResponse::CopyFrom(const ChatHistoryResponse& from) {
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool ChatHistoryResponse::IsInitialized() const {
-
-  for (int i = 0; i < message_size(); i++) {
-    if (!this->message(i).IsInitialized()) return false;
-  }
-  return true;
-}
-
-void ChatHistoryResponse::Swap(ChatHistoryResponse* other) {
-  if (other != this) {
-    message_.Swap(&other->message_);
-    std::swap(_has_bits_[0], other->_has_bits_[0]);
-    std::swap(_cached_size_, other->_cached_size_);
-  }
-}
-
-::std::string ChatHistoryResponse::GetTypeName() const {
-  return "message.ChatHistoryResponse";
 }
 
 

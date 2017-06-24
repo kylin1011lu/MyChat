@@ -152,7 +152,7 @@ bool sq_record_data_select(sq_record* record, sq_record_entry* entry, uint32_t i
 	return true;
 }
 
-bool sq_record_data_select(sq_record* record, sq_record_entry* entry, uint32_t last_time, message::ChatHistoryResponse & response)
+bool sq_record_data_select(sq_record* record, sq_record_entry* entry, uint32_t last_time, message::ChatResponse & response)
 {
 	if (!entry)
 	{
