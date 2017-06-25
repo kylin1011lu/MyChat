@@ -10,6 +10,7 @@ game_user_table::game_user_table()
 	connfd = -1;
 	userid = 0;
 	user_state = USER_STATE::OFFLINE;
+	last_time = 0;
 }
 
 game_user_table::~game_user_table()
@@ -68,6 +69,12 @@ void sq_handler_user::poll()
 			it++;
 		}
 	}
+
+}
+
+//用户连接断开，记录最后获得的消息时间
+void sq_handler_user::on_user_offline()
+{
 
 }
 
@@ -152,6 +159,10 @@ void sq_handler_user::do_user_login(const MY_MSG_HEAD* msghead)
 		user->connfd = msghead->s;
 		user->userid = userid;
 		user->user_state = USER_STATE::ONLINE;
+		uint32_t last_time;
+		sq_record_data_select(m_record, m_record_entry, userid, &last_time);
+
+		user->last_time = last_time;
 	}
 
 	//error_log("user:0x%llu request login\n", msg->userid);
@@ -190,15 +201,16 @@ void sq_handler_user::do_chat_request(const MY_MSG_HEAD* msghead)
 	resmsg.msg = &response;
 	resmsg.userid = msghead->userid;
 
-	//broadcast to all online users
+	//broadcast to all online ready users
 	std::map<int64_t, game_user_table*>::iterator it = m_user_online_table.begin();
 	while (it != m_user_online_table.end())
 	{
-		server->sendmsg(it->second->connfd, &resmsg);
+		if (it->second->user_state == USER_STATE::READY)
+		{
+			server->sendmsg(it->second->connfd, &resmsg);
+		}
 		it++;
 	}
-
-	//server->sendmsg(msghead->s, &resmsg);
 }
 
 void sq_handler_user::do_chat_history_request(const MY_MSG_HEAD* msghead)

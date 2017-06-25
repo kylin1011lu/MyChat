@@ -25,3 +25,15 @@ CREATE TABLE `message` (
     `chat_content` TEXT NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='message table';
 SET character_set_client = @saved_cs_client;
+
+--
+-- `last_message`
+--
+DROP TABLE IF EXISTS `last_message`;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+CREATE TABLE `last_message` (
+    `userid` INT UNSIGNED NOT NULL,
+    `last_time` TIMESTAMP NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='last_message table';
+SET character_set_client = @saved_cs_client;

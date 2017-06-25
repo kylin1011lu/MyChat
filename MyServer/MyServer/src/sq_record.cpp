@@ -218,6 +218,40 @@ bool sq_record_data_select(sq_record* record, sq_record_entry* entry, uint32_t l
 	return true;
 }
 
+bool sq_record_data_select(sq_record* record, sq_record_entry* entry, uint32_t id, uint32_t *last_time)
+{
+	if (!entry)
+	{
+		return false;
+	}
+
+	char buf[960] = { 0 };
+	MYSQL_BIND result;
+	unsigned long lengths;
+	sq_mysql*db = entry->db_main;
+
+	MYSQL_TIME ts;
+
+	snprintf(buf, sizeof(buf), "SELECT last_time FROM last_message WHERE id = %d",id);
+	if (!db->prepare(buf)) { return false; }
+	if (!db->exec()) { return false; }
+
+	memset(&result, 0, sizeof(result));
+
+	result.buffer_type = MYSQL_TYPE_TIMESTAMP;
+	result.buffer = (char*)&ts;
+	result.length = &lengths;
+
+
+	if (!db->bind_result(&result)) { return false; }
+	if (!db->fetch()) { return false; }
+	if (!db->free_result()) { return false; }
+
+	*last_time = sql_mktime(ts);
+
+	return true;
+}
+
 bool sq_record_data_insert(sq_record* record, sq_record_entry* entry, uint32_t id, const char* name,const char*pwd)
 {
 	if (!entry)

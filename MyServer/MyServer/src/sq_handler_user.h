@@ -16,6 +16,7 @@ struct game_user_table
 	SOCKET connfd;
 	int64_t userid;
 	int user_state;
+	int last_time;
 };
 
 struct sq_handler_user : public sq_handler
@@ -30,6 +31,8 @@ struct sq_handler_user : public sq_handler
 	void				do_user_login(const MY_MSG_HEAD* msg);
 	void				do_chat_request(const MY_MSG_HEAD* msg);
 	void				do_chat_history_request(const MY_MSG_HEAD* msg);
+
+	void				on_user_offline();
 private:
 	sq_record*			m_record;
 	sq_record_entry*	m_record_entry;

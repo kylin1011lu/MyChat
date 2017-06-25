@@ -23,16 +23,6 @@ function MsgManager:init()
 	self.msgCachePath = writePath..MSG_CACHE_FILE
 
 	self.all_msg = {}
-
-	--Test
-	-- self.all_msg =
-	-- {
-	-- 	["message"] = {{chat_content="测试1",send_userid=1234,send_time=1213445},
-	-- 				{chat_content="测试2",send_userid=1234,send_time=1213445},
-	-- 				{chat_content="测试3",send_userid=1234,send_time=1213445},
-	-- 				{chat_content="测试4",send_userid=1234,send_time=1213445},
-	-- 				}
-	-- }
 end
 
 -- message MessageInfo

@@ -42,6 +42,7 @@ class ChatHistoryRequest;
 class MessageInfo;
 class MsgCacheInfo;
 class ChatResponse;
+class ChatUpdateRequest;
 
 enum AccountRegisterRequest_MSGID {
   AccountRegisterRequest_MSGID_ID = 100
@@ -111,6 +112,16 @@ const ChatHistoryRequest_MSGID ChatHistoryRequest_MSGID_MSGID_MIN = ChatHistoryR
 const ChatHistoryRequest_MSGID ChatHistoryRequest_MSGID_MSGID_MAX = ChatHistoryRequest_MSGID_ID;
 const int ChatHistoryRequest_MSGID_MSGID_ARRAYSIZE = ChatHistoryRequest_MSGID_MSGID_MAX + 1;
 
+enum ChatResponse_ChatType {
+  ChatResponse_ChatType_CHAT_TYPE_NORMAL = 0,
+  ChatResponse_ChatType_CHAT_TYPE_HISTORY = 1,
+  ChatResponse_ChatType_CHAT_TYPE_UPDATE = 2
+};
+bool ChatResponse_ChatType_IsValid(int value);
+const ChatResponse_ChatType ChatResponse_ChatType_ChatType_MIN = ChatResponse_ChatType_CHAT_TYPE_NORMAL;
+const ChatResponse_ChatType ChatResponse_ChatType_ChatType_MAX = ChatResponse_ChatType_CHAT_TYPE_UPDATE;
+const int ChatResponse_ChatType_ChatType_ARRAYSIZE = ChatResponse_ChatType_ChatType_MAX + 1;
+
 enum ChatResponse_MSGID {
   ChatResponse_MSGID_ID = 105
 };
@@ -118,6 +129,14 @@ bool ChatResponse_MSGID_IsValid(int value);
 const ChatResponse_MSGID ChatResponse_MSGID_MSGID_MIN = ChatResponse_MSGID_ID;
 const ChatResponse_MSGID ChatResponse_MSGID_MSGID_MAX = ChatResponse_MSGID_ID;
 const int ChatResponse_MSGID_MSGID_ARRAYSIZE = ChatResponse_MSGID_MSGID_MAX + 1;
+
+enum ChatUpdateRequest_MSGID {
+  ChatUpdateRequest_MSGID_ID = 108
+};
+bool ChatUpdateRequest_MSGID_IsValid(int value);
+const ChatUpdateRequest_MSGID ChatUpdateRequest_MSGID_MSGID_MIN = ChatUpdateRequest_MSGID_ID;
+const ChatUpdateRequest_MSGID ChatUpdateRequest_MSGID_MSGID_MAX = ChatUpdateRequest_MSGID_ID;
+const int ChatUpdateRequest_MSGID_MSGID_ARRAYSIZE = ChatUpdateRequest_MSGID_MSGID_MAX + 1;
 
 // ===================================================================
 
@@ -1127,6 +1146,20 @@ class ChatResponse : public ::google::protobuf::MessageLite {
 
   // nested types ----------------------------------------------------
 
+  typedef ChatResponse_ChatType ChatType;
+  static const ChatType CHAT_TYPE_NORMAL = ChatResponse_ChatType_CHAT_TYPE_NORMAL;
+  static const ChatType CHAT_TYPE_HISTORY = ChatResponse_ChatType_CHAT_TYPE_HISTORY;
+  static const ChatType CHAT_TYPE_UPDATE = ChatResponse_ChatType_CHAT_TYPE_UPDATE;
+  static inline bool ChatType_IsValid(int value) {
+    return ChatResponse_ChatType_IsValid(value);
+  }
+  static const ChatType ChatType_MIN =
+    ChatResponse_ChatType_ChatType_MIN;
+  static const ChatType ChatType_MAX =
+    ChatResponse_ChatType_ChatType_MAX;
+  static const int ChatType_ARRAYSIZE =
+    ChatResponse_ChatType_ChatType_ARRAYSIZE;
+
   typedef ChatResponse_MSGID MSGID;
   static const MSGID ID = ChatResponse_MSGID_ID;
   static inline bool MSGID_IsValid(int value) {
@@ -1141,10 +1174,17 @@ class ChatResponse : public ::google::protobuf::MessageLite {
 
   // accessors -------------------------------------------------------
 
-  // repeated .message.MessageInfo message = 2;
+  // required .message.ChatResponse.ChatType chat_type = 2;
+  inline bool has_chat_type() const;
+  inline void clear_chat_type();
+  static const int kChatTypeFieldNumber = 2;
+  inline ::message::ChatResponse_ChatType chat_type() const;
+  inline void set_chat_type(::message::ChatResponse_ChatType value);
+
+  // repeated .message.MessageInfo message = 3;
   inline int message_size() const;
   inline void clear_message();
-  static const int kMessageFieldNumber = 2;
+  static const int kMessageFieldNumber = 3;
   inline const ::message::MessageInfo& message(int index) const;
   inline ::message::MessageInfo* mutable_message(int index);
   inline ::message::MessageInfo* add_message();
@@ -1155,8 +1195,106 @@ class ChatResponse : public ::google::protobuf::MessageLite {
 
   // @@protoc_insertion_point(class_scope:message.ChatResponse)
  private:
+  inline void set_has_chat_type();
+  inline void clear_has_chat_type();
 
   ::google::protobuf::RepeatedPtrField< ::message::MessageInfo > message_;
+  int chat_type_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+
+  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  friend void  protobuf_AddDesc_common_2eproto_impl();
+  #else
+  friend void  protobuf_AddDesc_common_2eproto();
+  #endif
+  friend void protobuf_AssignDesc_common_2eproto();
+  friend void protobuf_ShutdownFile_common_2eproto();
+
+  void InitAsDefaultInstance();
+  static ChatResponse* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class ChatUpdateRequest : public ::google::protobuf::MessageLite {
+ public:
+  ChatUpdateRequest();
+  virtual ~ChatUpdateRequest();
+
+  ChatUpdateRequest(const ChatUpdateRequest& from);
+
+  inline ChatUpdateRequest& operator=(const ChatUpdateRequest& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ChatUpdateRequest& default_instance();
+
+  #ifdef GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER
+  // Returns the internal default instance pointer. This function can
+  // return NULL thus should not be used by the user. This is intended
+  // for Protobuf internal code. Please use default_instance() declared
+  // above instead.
+  static inline const ChatUpdateRequest* internal_default_instance() {
+    return default_instance_;
+  }
+  #endif
+
+  void Swap(ChatUpdateRequest* other);
+
+  // implements Message ----------------------------------------------
+
+  ChatUpdateRequest* New() const;
+  void CheckTypeAndMergeFrom(const ::google::protobuf::MessageLite& from);
+  void CopyFrom(const ChatUpdateRequest& from);
+  void MergeFrom(const ChatUpdateRequest& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::std::string GetTypeName() const;
+
+  // nested types ----------------------------------------------------
+
+  typedef ChatUpdateRequest_MSGID MSGID;
+  static const MSGID ID = ChatUpdateRequest_MSGID_ID;
+  static inline bool MSGID_IsValid(int value) {
+    return ChatUpdateRequest_MSGID_IsValid(value);
+  }
+  static const MSGID MSGID_MIN =
+    ChatUpdateRequest_MSGID_MSGID_MIN;
+  static const MSGID MSGID_MAX =
+    ChatUpdateRequest_MSGID_MSGID_MAX;
+  static const int MSGID_ARRAYSIZE =
+    ChatUpdateRequest_MSGID_MSGID_ARRAYSIZE;
+
+  // accessors -------------------------------------------------------
+
+  // required uint32 last_time = 2;
+  inline bool has_last_time() const;
+  inline void clear_last_time();
+  static const int kLastTimeFieldNumber = 2;
+  inline ::google::protobuf::uint32 last_time() const;
+  inline void set_last_time(::google::protobuf::uint32 value);
+
+  // @@protoc_insertion_point(class_scope:message.ChatUpdateRequest)
+ private:
+  inline void set_has_last_time();
+  inline void clear_has_last_time();
+
+  ::google::protobuf::uint32 last_time_;
 
   mutable int _cached_size_;
   ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
@@ -1170,7 +1308,7 @@ class ChatResponse : public ::google::protobuf::MessageLite {
   friend void protobuf_ShutdownFile_common_2eproto();
 
   void InitAsDefaultInstance();
-  static ChatResponse* default_instance_;
+  static ChatUpdateRequest* default_instance_;
 };
 // ===================================================================
 
@@ -1908,7 +2046,30 @@ MsgCacheInfo::mutable_message() {
 
 // ChatResponse
 
-// repeated .message.MessageInfo message = 2;
+// required .message.ChatResponse.ChatType chat_type = 2;
+inline bool ChatResponse::has_chat_type() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ChatResponse::set_has_chat_type() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ChatResponse::clear_has_chat_type() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ChatResponse::clear_chat_type() {
+  chat_type_ = 0;
+  clear_has_chat_type();
+}
+inline ::message::ChatResponse_ChatType ChatResponse::chat_type() const {
+  return static_cast< ::message::ChatResponse_ChatType >(chat_type_);
+}
+inline void ChatResponse::set_chat_type(::message::ChatResponse_ChatType value) {
+  assert(::message::ChatResponse_ChatType_IsValid(value));
+  set_has_chat_type();
+  chat_type_ = value;
+}
+
+// repeated .message.MessageInfo message = 3;
 inline int ChatResponse::message_size() const {
   return message_.size();
 }
@@ -1931,6 +2092,32 @@ ChatResponse::message() const {
 inline ::google::protobuf::RepeatedPtrField< ::message::MessageInfo >*
 ChatResponse::mutable_message() {
   return &message_;
+}
+
+// -------------------------------------------------------------------
+
+// ChatUpdateRequest
+
+// required uint32 last_time = 2;
+inline bool ChatUpdateRequest::has_last_time() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void ChatUpdateRequest::set_has_last_time() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void ChatUpdateRequest::clear_has_last_time() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void ChatUpdateRequest::clear_last_time() {
+  last_time_ = 0u;
+  clear_has_last_time();
+}
+inline ::google::protobuf::uint32 ChatUpdateRequest::last_time() const {
+  return last_time_;
+}
+inline void ChatUpdateRequest::set_last_time(::google::protobuf::uint32 value) {
+  set_has_last_time();
+  last_time_ = value;
 }
 
 

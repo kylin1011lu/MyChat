@@ -9,10 +9,11 @@ struct USER_STATE
 {
 	enum
 	{
-		FORBIDDEN = 1,
-		ONLINE = 2,
-		OFFLINE = 3,
-		UNKNOWN = 9,
+		FORBIDDEN	= 1,
+		ONLINE		= 2,
+		OFFLINE		= 3,
+		READY		= 4,
+		UNKNOWN		= 9,
 	};
 };
 

@@ -1,6 +1,8 @@
 #ifndef __FRAMEWORK_H__
 #define __FRAMEWORK_H__
 
+#define _SILENCE_STDEXT_HASH_DEPRECATION_WARNINGS 1
+
 #if defined(__cplusplus)
 #include <new>
 #include <iostream>
